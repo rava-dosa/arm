@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Apoorva&#39;s Blog</title>
+    <description>Just plain simple and awesome!</description>
+    <link>http://rava-dosa.github.io</link>
+    <atom:link href="http://rava-dosa.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>How to install tensorflow-gpu without shitting on your computer ?</title>
+        <description>
+          Sorry for the word &quot;Sh******&quot; - 
+          Once upon a time There was a operating system called Ubuntu 14.04, I tried installing tensorflow gpu on that. And I was stuck in login loop as Tom cruise was stuck in time loop in the movie “The Edge of tomorrow”. I couldn’t get out of login loop until I...
+        </description>
+        <pubDate>Thu, 02 Aug 2018 00:00:00 -0700</pubDate>
+        <link>http://rava-dosa.github.io/2018-08-02-Tensorflow-Gpu/</link>
+        <guid isPermaLink="true">http://rava-dosa.github.io/2018-08-02-Tensorflow-Gpu/</guid>
+      </item>
+    
+      <item>
+        <title>First post!</title>
+        <description>
+          
+          I will try to publish atleast 3 blogs every week, on computer science on both hardware and software, tutorials or papers which have blown my mind. You might get to know my academic and other depth as well.
+
+        </description>
+        <pubDate>Wed, 01 Aug 2018 00:00:00 -0700</pubDate>
+        <link>http://rava-dosa.github.io/2018-08-01-intro/</link>
+        <guid isPermaLink="true">http://rava-dosa.github.io/2018-08-01-intro/</guid>
+      </item>
+    
+      <item>
+        <title>WTF is FDO ?</title>
+        <description>
+          Full form is -&gt; Feedback directed optimization - 
+          According to wikipedia Profile-guided optimization (PGO, sometimes pronounced as pogo), also known as profile-directed feedback (PDF) and feedback-directed optimization (FDO) is a compiler optimization technique in computer programming that uses profiling to improve program runtime performance. What it really means again from wikipedia:- Optimization techniques based on analysis of the...
+        </description>
+        <pubDate>Wed, 01 Aug 2018 00:00:00 -0700</pubDate>
+        <link>http://rava-dosa.github.io/2018-08-01-FDO/</link>
+        <guid isPermaLink="true">http://rava-dosa.github.io/2018-08-01-FDO/</guid>
+      </item>
+    
+  </channel>
+</rss>
