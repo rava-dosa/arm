@@ -12,7 +12,7 @@ This is neither totally theoritical nor totally hands-on. It is amalgammation of
 So linux kernel is a monolithic kernel. To be accurate it is Modular monolithic. Monolithic term in kernal is used in the sense of permission of code running there. If the whole kernel is running in ** ring 0 ** then the kernel will be called monoltihic. But if very few code is running in ring 0 then the kernel is called micro kernel architecture.  
 So if a module crashes the whole kernel will crash in linux. So always spawn a VM if you are trying to add garbage in linux.
 #### Hello World
-{% highlight c linenos %}  
+{% highlight javascript linenos %}  
 /*  
    hello-1.c - The simplest kernel module.
  */  
