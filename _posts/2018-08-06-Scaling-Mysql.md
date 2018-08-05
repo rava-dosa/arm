@@ -26,8 +26,10 @@ Logically take any slave(or the most updated one) and do update using binlog man
 * Not good for application like google docs, github, or pastebin, which is write-heavy application.
 * If there is large data you will have storage issues.
 * Slave can return stale(unupdated) data.
+
 #### Other points to take care before we move to sharding
 * Active Data set-> Set of all data that is frequently accessed by user. It is important to think about the active data set because too much active data will lead to increase in cache size. And what and how you define active is also important. Before setting threshold you have to check user pattern.
+
 ### Sharding
 Divide the dataset in smaller part and assign each part to a single server. 
 #### Sharding key
