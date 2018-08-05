@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Dialogues on linux kernel-1
+title: Dialogues on linux kernel-2
 subtitle: Kernel Syscall hooking
 tags: [tutorial, software, linux, kernel, os]
 ---

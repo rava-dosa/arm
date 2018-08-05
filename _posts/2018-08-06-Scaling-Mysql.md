@@ -5,7 +5,7 @@ subtitle: Do you really think that there is just one .db file in cluster of comp
 tags: [scaling, software, distributed-system]
 ---
 ### Cluster of computers
-![Beowulf-cluster](https://i.pinimg.com/originals/a4/76/e5/a476e5ac785fa192712b24316bfaf3c3.gif){:class="img-responsive"}
+![Beowulf-cluster](https://qph.fs.quoracdn.net/main-qimg-f78e88e58d74f6a67092381fc56b6baa-c){:class="img-responsive"}
 ### Before We start
 It's totally theoritical I have no practical experience in this topic. I want that(practical experience) that's why I am writing this blog &#x1f609; .
 ### How to scale with MySQL ?
