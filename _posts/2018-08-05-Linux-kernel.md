@@ -13,9 +13,7 @@ So linux kernel is a monolithic kernel. To be accurate it is Modular monolithic.
 So if a module crashes the whole kernel will crash in linux. So always spawn a VM if you are trying to add garbage in linux.
 #### Hello World
 {% highlight javascript linenos %}  
-/*  
-   hello-1.c - The simplest kernel module.
- */  
+// hello-1.c - The simplest kernel module.  
 #include <linux/module.h>    /* Needed by all modules */
 #include <linux/kernel.h>    /* Needed for KERN_INFO */
 
