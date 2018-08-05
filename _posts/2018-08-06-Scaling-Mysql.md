@@ -43,6 +43,7 @@ Key used to identify which data resides in which server. Such as in a counter-st
 * Consistency-> Every transaction transforms dataset from one consistent to other consistent state.
 * Isolation -> It guarentees that transaction can run in parallel without affecting each other.
 * Durability -> Once a transaction happens it is not lost.
+
 ### PostScript
 Refer me a book or website or topic for this topic if you have some real life experience with these type of system.
 
