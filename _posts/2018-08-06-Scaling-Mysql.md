@@ -11,6 +11,7 @@ It's totally theoritical I have no practical experience in this topic. I want th
 ### How to scale with MySQL ?
 * Replication 
 * Sharding
+
 ### Replication
 In this process you replicate the main .db file to different machine. 
 #### How general processes like update, insert, delete etc. works ?
