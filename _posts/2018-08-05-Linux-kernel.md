@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A monologue on linux kernel
+title: Dialogues on linux kernel-1
 subtitle: Linux starter pack
 tags: [tutorial, software, linux, kernel, os]
 ---
@@ -12,6 +12,7 @@ This is neither totally theoritical nor totally hands-on. It is amalgammation of
 So linux kernel is a monolithic kernel. To be accurate it is Modular monolithic. Monolithic term in kernal is used in the sense of permission of code running there. If the whole kernel is running in ** ring 0 ** then the kernel will be called monoltihic. But if very few code is running in ring 0 then the kernel is called micro kernel architecture.  
 So if a module crashes the whole kernel will crash in linux. So always spawn a VM if you are trying to add garbage in linux.
 #### Hello World
+##### file-name -> hello-1.c
 ```
 #include <linux/module.h>
 #include <linux/kernel.h>    
@@ -28,6 +29,13 @@ void cleanup_module(void)
 }  
 
 ```
-
+To compile this code you can use [makefile](https://github.com/rava-dosa/linux/tree/master/Linux-Hello%20world) provided in this repo with proper naming as it is in the repository.  
+If you have done everything right till date then try
+```
+insmod ./hello-1.ko
+```
+Now you can check hello world being printed in /var/log/kern.log.  
+To check do cat /var/log/kern.log.  
+That's all folks.
 
 
