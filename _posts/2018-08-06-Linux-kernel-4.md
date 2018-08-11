@@ -22,6 +22,7 @@ Command prefix "hdfs ":
 | fs –du /user/username/destination-address | HDFS disk usage command |
 | fs –df | Display disk usage of current hadoop distributed file system |
 | fs –expunge | empties the trash by deleting all the files and directories |
+
 ###### There a lot of other command similar to unix file system with hadoop fs prefixed.
 Command prefix "hdfs ":
 
