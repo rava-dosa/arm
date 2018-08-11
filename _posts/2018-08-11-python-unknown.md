@@ -20,8 +20,22 @@ The ChainMap class manages a sequence of dictionaries, and searches through them
 {% highlight python linenos %}
 import collections
 
-a = {'a': 'A', 'c': 'C'}
-b = {'b': 'B', 'c': 'D'}
+a = {1: 10, 2: 20}
+b = {3: 30, 4: 40, 2:200}
 
-m = collections.ChainMap(a, b)
+m1 = collections.ChainMap(a, b)
+m2 = collections.ChainMap(b, a)
+print(m1[2],end=" ")
+print(m2[2],end="\n")
+print(list(m1.keys()))
+print(list(m1.values()))
+for k, v in m1.items():
+    print('{} = {}'.format(k, v))
+m1.maps = list(reversed(m1.maps))
+print('m1 = {}'.format(m1[2]))
+a[5]=50
+print(m1[5])
+m3 = m1.new_child()
+m3[2] = 2000
+m3[10] = 209
 {% endhighlight %}
