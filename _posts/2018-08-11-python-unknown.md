@@ -16,11 +16,11 @@ Some notable mention wrt linux:
 #### ChainMap
 The ChainMap class manages a sequence of dictionaries, and searches through them in the order they are given to find values associated with keys
 
-```python
+{% highlight python linenos %}
 import collections
 
 a = {'a': 'A', 'c': 'C'}
 b = {'b': 'B', 'c': 'D'}
 
 m = collections.ChainMap(a, b)
-```
+{% endhighlight %}
