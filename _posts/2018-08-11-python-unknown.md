@@ -12,6 +12,82 @@ Some notable mention wrt linux:
 * Cpython -> CPython is the original Python implementation
 * PyPy -> A fast python implementation with a JIT compiler
 * Jython -> Python running on the Java Virtual Machine
+### Profiling and optimizing python
+Timing function
+
+{% highlight python linenos %}
+
+import time
+from functools import wraps
+import random
+
+def timing(f):
+    def wrap(*args):
+        time1 = time.time()
+        ret = f(*args)
+        time2 = time.time()
+        print('{:s} function took {:.3f} ms'.format(f.__name__, (time2-time1)*1000.0))
+        return ret
+    return wrap
+
+@timing
+def random_sort(n):
+    return sorted([random.random() for i in range(n)])
+
+{% endhighlight %}
+
+using time it
+
+{% highlight python linenos %}
+
+import timeit
+
+def linear_search(mylist, find):
+    for x in mylist:
+        if x == find:
+            return True
+    return False
+
+def linear_time():
+    SETUP_CODE = '''
+from __main__ import linear_search
+from random import randint'''
+     
+    TEST_CODE = '''
+mylist = [x for x in range(10000)]
+find = randint(0, len(mylist))
+linear_search(mylist, find)
+    '''
+    # timeit.repeat statement
+    times = timeit.repeat(setup = SETUP_CODE,stmt = TEST_CODE,repeat = 3,number = 10000)
+ 
+    # priniting minimum exec. time
+    print('Linear search time: {}'.format(min(times)))  
+ 
+if __name__ == "__main__":
+    linear_time()
+
+{% endhighlight %}
+
+timing an script
+
+'''
+time -p python script.py
+'''
+using cprofile
+
+'''
+python -m cProfile -s cumulative script.py
+'''
+
+profiling memory
+
+'''
+pip install memory_profiler
+pip install psutil
+python -m memory_profiler script.py
+'''
+there is also one tool called guppy. And it's a really good library.
 
 ### Some less known data structure
 This part of the blog is taken from PyMotw
@@ -119,4 +195,138 @@ print('As Dictionary:', bob._asdict())
 
 #### [Some more detail about collection](https://pymotw.com/3/collections/abc.html)
 ### Itertools
+The chain() function takes several iterators as arguments and returns a single iterator that produces the contents of all of the inputs as though they came from a single iterator.
+
+{% highlight python linenos %}
+
+from itertools import *
+
+for i in chain([1, 2, 3], ['a', 'b', 'c']):
+    print(i, end=' ')
+print()
+
+{% endhighlight %}
+
+#### zip_longest()
+
+{% highlight python linenos %}
+
+from itertools import *
+
+r1 = range(3)
+r2 = range(2)
+
+print('\nzip_longest processes all of the values:')
+print(list(zip_longest(r1, r2)))
+
+{% endhighlight %}
+
+#### islice()
+The islice() function returns an iterator which returns selected items from the input iterator, by index.
+
+{% highlight python linenos %}
+
+from itertools import *
+
+print('Stop at 5:')
+for i in islice(range(100), 5):
+    print(i, end=' ')
+print('\n')
+
+print('Start at 5, Stop at 10:')
+for i in islice(range(100), 5, 10):
+    print(i, end=' ')
+print('\n')
+
+print('By tens to 100:')
+for i in islice(range(100), 0, 100, 10):
+    print(i, end=' ')
+print('\n')
+
+{% endhighlight %}
+
+#### starmap()
+The starmap() function is similar to map(), but instead of constructing a tuple from multiple iterators, it splits up the items in a single iterator as arguments to the mapping function using the * syntax.
+
+{% highlight python linenos %}
+
+from itertools import *
+
+values = [(0, 5), (1, 6), (2, 7), (3, 8), (4, 9)]
+
+for i in starmap(lambda x, y: (x, y, x * y), values):
+    print('{} * {} = {}'.format(*i))
+
+{% endhighlight %}
+
+#### fraction and count()
+count() function returns an iterator that produces consecutive integers, indefinitely
+
+{% highlight python linenos %}
+
+from itertools import *
+
+import fractions
+from itertools import *
+
+start = fractions.Fraction(1, 3)
+step = fractions.Fraction(1, 3)
+
+for i in zip(count(start, step), ['a', 'b', 'c']):
+    print('{}: {}'.format(*i))
+
+
+{% endhighlight %}
+
+cycle() function returns an iterator that repeats the contents of the arguments it is given indefinitely. Since it has to remember the entire contents of the input iterator,  it may consume quite a bit of memory if the iterator is long.
+
+#### accumulate()
+accumulate() function processes the input iterable, passing the nth and n+1st item to a function and producing the return value instead of either input. The default function used to combine the two values adds them, so accumulate() can be used to produce the cumulative sum of a series of numerical inputs.
+
+{% highlight python linenos %}
+
+from itertools import *
+
+print(list(accumulate(range(5))))
+print(list(accumulate('abcde')))
+
+{% endhighlight %}
+
+It is possible to combine accumulate() with any other function that takes two input values to achieve different results.
+
+{% highlight python linenos %}
+
+from itertools import *
+def f(a, b):
+    print(a, b)
+    return b + a + b
+print(list(accumulate('abcde', f)))
+
+{% endhighlight %}
+
+#### permutation()
+
+{% highlight python linenos %}
+
+from itertools import permutations
+perm = permutations([1, 2, 3], 2)
+for i in list(perm):
+    print i
+
+# Answer->(1, 2),(1, 3),(2, 1),(2, 3),(3, 1),(3, 2)
+
+{% endhighlight %}
+
+#### combination()
+
+{% highlight python linenos %}
+
+from itertools import combinations
+comb = combinations([1, 2, 3], 2)
+for i in list(comb):
+    print i
+
+{% endhighlight %}
+
+
 
