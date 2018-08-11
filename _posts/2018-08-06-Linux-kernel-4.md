@@ -9,8 +9,10 @@ tags: [tutorial, software, linux, kernel, os]
 ### Before We start
 This series is neither totally theoritical nor totally hands-on. It is amalgammation of both. Just the way I think. You will not become expert which should be implied.  
 ### ?
+Here's a useless table:
+
 | Commands | Description |
-|-------|--------|
+| :------ | :----------------------- |
 | fs –help ls | lists the usage information along with the options to use the command |
 
 
