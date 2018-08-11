@@ -14,6 +14,6 @@ Here's a useless table:
 | Commands | Description |
 | :------ | :----------------------- |
 | fs –help ls | lists the usage information along with the options to use the command |
-
+| fs –ls –R /user/username | Returns all the available files and recursively lists all the subdirectories under /user/username |
 
 
