@@ -12,6 +12,7 @@ Some notable mention wrt linux:
 * Cpython -> CPython is the original Python implementation
 * PyPy -> A fast python implementation with a JIT compiler
 * Jython -> Python running on the Java Virtual Machine
+
 ### Some less known data structure
 #### ChainMap
 The ChainMap class manages a sequence of dictionaries, and searches through them in the order they are given to find values associated with keys
