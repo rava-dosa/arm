@@ -15,5 +15,9 @@ Here's a useless table:
 | :------ | :----------------------- |
 | fs –help ls | lists the usage information along with the options to use the command |
 | fs –ls –R /user/username | Returns all the available files and recursively lists all the subdirectories under /user/username |
+| fs –mkdir /user/username/directory-name | create a new directory |
+| fs –copyFromLocal Sample1.txt /user/username/destination-address | 
+| fs –put Sample2.txt /user/username/destination-address | uploads a single file or multiple source files from local file system to hadoop distributed file system |
+| fs –moveFromLocal Sample1.txt /user/username/destination-address | deletes original and copy |
 
 
