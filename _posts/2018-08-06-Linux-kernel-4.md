@@ -52,7 +52,8 @@ Command prefix "hdfs fcsk ":
 | -maintenance | Print out maintenance state node details. |
 | -blockId | Print out information about the block. |
 
-prefix hdfs getconf: 
+prefix hdfs getconf:
+
 | Commands | Description |
 | :------ | :----------------------- |
 | -namenodes | gets list of namenodes in the cluster. |
@@ -69,6 +70,7 @@ prefix hdfs groups:
 |  username | Returns the group information given one or more usernames. |
 
 prefix hdfs balancer:
+
 | Commands | Description |
 | :------ | :----------------------- |
 | -policy policy | datanode (default): Cluster is balanced if each datanode is balanced.blockpool: Cluster is balanced if each block pool in each datanode is balanced. |
