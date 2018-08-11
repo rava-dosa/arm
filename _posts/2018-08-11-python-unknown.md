@@ -15,6 +15,7 @@ Some notable mention wrt linux:
 ### Some less known data structure
 #### ChainMap
 The ChainMap class manages a sequence of dictionaries, and searches through them in the order they are given to find values associated with keys
+
 ```python
 import collections
 
