@@ -16,8 +16,19 @@ Here's a useless table:
 | fs –help ls | lists the usage information along with the options to use the command |
 | fs –ls –R /user/username | Returns all the available files and recursively lists all the subdirectories under /user/username |
 | fs –mkdir /user/username/directory-name | create a new directory |
-| fs –copyFromLocal Sample1.txt /user/username/destination-address | 
+| fs –copyFromLocal Sample1.txt /user/username/destination-address | copy from local filesystem to hdfs |
 | fs –put Sample2.txt /user/username/destination-address | uploads a single file or multiple source files from local file system to hadoop distributed file system |
 | fs –moveFromLocal Sample1.txt /user/username/destination-address | deletes original and copy |
+| fs –du /user/username/destination-address | HDFS disk usage command |
+| fs –df | Display disk usage of current hadoop distributed file system |
+| fs –expunge | empties the trash by deleting all the files and directories |
+
+Here's a useless table again : 
+
+| Commands | Description |
+| :------ | :----------------------- |
+| classpath --glob | expands wildcard *I don't know what that is* |
+| classpath --jar | write classpath as manifest in jar named path |
+| classpath -h | print help |
 
 
