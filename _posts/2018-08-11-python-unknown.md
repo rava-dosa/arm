@@ -12,6 +12,7 @@ Some notable mention wrt linux:
 * Cpython -> CPython is the original Python implementation
 * PyPy -> A fast python implementation with a JIT compiler
 * Jython -> Python running on the Java Virtual Machine
+
 ### Profiling and optimizing python
 Timing function
 
