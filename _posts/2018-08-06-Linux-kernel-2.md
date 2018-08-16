@@ -174,12 +174,12 @@ Yup! you did it yourself. Restart your computer and Now you have added a syscall
 #include <unistd.h>
 int main(){
 long int s = syscall(335);
-printf("Syscall called %ld \n",s);
+printf("Syscall returned %ld \n",s);
 return 0;
 }
 ```
 
-Now compile this programm with gcc try.c and then run it by ./a.out. if it prints syscall called 0, then your syscall worked else not. 
+Now compile this programm with gcc try.c and then run it by ./a.out. if it prints syscall returned 0, then your syscall worked else not. 
 
 ```
 dmesg
