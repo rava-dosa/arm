@@ -106,7 +106,7 @@ asmlinkage long sys_helloworld(void)
     printk("Hello world\n");
     return 0;
 }
-{% enhighlight %}
+{% endhighlight %}
 
 Now make a makefile
 
