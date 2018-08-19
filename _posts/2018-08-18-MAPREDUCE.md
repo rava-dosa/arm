@@ -109,7 +109,7 @@ FileOutputFormat.setOutputCompressorClass(job, org.apache.hadoop.io.compress.Sna
 ```
 [Ref](https://stackoverflow.com/questions/30659547/mapreduce-job-not-setting-compression-codec-correctly)
 * For more information visit [ref](https://hadoop.apache.org/docs/current3/api/org/apache/hadoop/mapreduce/class-use/Mapper.html)  
-
+  
 **No of Maps**  
  job.set(MRJobConfig.NUM_MAPS, int) according to the previous code.  
 **Reducer**  
@@ -149,7 +149,7 @@ InputFormat describes the input-specification for a MapReduce job.The MapReduce 
 * FileSplit is the default InputSplit. It sets mapreduce.map.input.file to the path of the input file for the logical split.  
 **RecordReader**
 * RecordReader reads <key, value> pairs from an InputSplit.  
-**This Job input topic is not very clear tom me yet.**
+**This Job input topic is not very clear to me yet.**
 #### Task Side-Effect Files.
 In some applications, component tasks need to create and/or write to side-files, which differ from the actual job-output files. So this manages how the file will be saved and all that.
 #### Submitting jobs to queues.
