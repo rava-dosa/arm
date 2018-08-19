@@ -9,7 +9,7 @@ tags: [big-data, software, distributed-system]
 ### Before We start
 It's totally theoritical I have no practical experience in this topic. I want that(practical experience) that's why I am writing this blog &#x1f609; . I am copying content from various sources which I have read and experimented in the last week.
 ### Installation
-This [link](http://exabig.com/blog/2018/03/20/setup-hadoop-3-1-0-single-node-cluster-on-ubuntu-16-04/) works totally fine. Except the download link  Use this link to download hadoop instead [link](http://www-us.apache.org/dist/hadoop/common/hadoop-3.1.1/hadoop-3.1.1.tar.gz) .Few pointers for misery I faced:
+This [[link]](http://exabig.com/blog/2018/03/20/setup-hadoop-3-1-0-single-node-cluster-on-ubuntu-16-04/) works totally fine. Except the download link  Use this link to download hadoop instead [[link]](http://www-us.apache.org/dist/hadoop/common/hadoop-3.1.1/hadoop-3.1.1.tar.gz) .Few pointers for misery I faced:
 * OpenJdk doesn't work properly with hadoop. After a day's effort I realized that my node and resource manager is not working due to OpenJdk. I changed it to oracle 8 and then it works properly. I even disabled firewall even then it didn't work. 
 * Make a new user or it will give some root error.
 * Take care of version in hadoop what solution and configuration is provided for 2.0 may not work for versions > 3.
