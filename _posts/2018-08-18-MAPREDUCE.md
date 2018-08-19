@@ -94,7 +94,7 @@ for(int i = 0; i < values.size(); i++) {
     FileInputFormat.addInputPath(job, new Path(args[0]));
     FileOutputFormat.setOutputPath(job, new Path(args[1]));
 ```
-This is used to set different configuration of a job.[ref](https://hadoop.apache.org/docs/current3/api/org/apache/hadoop/mapreduce/Job.html)
+This is used to set different configuration of a job.[[ref]](https://hadoop.apache.org/docs/current3/api/org/apache/hadoop/mapreduce/Job.html)
 #### Payload
 ![MapReduce1](https://sharathambati.files.wordpress.com/2014/08/0f163-p4.png?w=640){:class="img-responsive"}
 **Mapper**  
