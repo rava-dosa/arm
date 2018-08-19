@@ -130,7 +130,7 @@ Map parameters
 | mapreduce.task.io.sort.mb | int | The cumulative size of the serialization and accounting buffers storing records emitted from the map, in megabytes.  |
 | mapreduce.map.sort.spill.percent | float | The soft limit in the serialization buffer. Once reached, a thread will begin to spill the contents to disk in the background.  |
 
-Similarly there are reduce parameters.
+Similarly there are reduce parameters.[Ref](https://hadoop.apache.org/docs/current3/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html#Shuffle.2FReduce_Parameters)
 #### Logs
 The standard output (stdout) and error (stderr) streams and the syslog of the task are read by the NodeManager and logged to ${HADOOP_LOG_DIR}/userlogs.
 #### Job control
@@ -148,8 +148,8 @@ InputFormat describes the input-specification for a MapReduce job.The MapReduce 
 * InputSplit represents the data to be processed by an individual Mapper.
 * FileSplit is the default InputSplit. It sets mapreduce.map.input.file to the path of the input file for the logical split.  
 **RecordReader**
-* RecordReader reads <key, value> pairs from an InputSplit.
-**This Job input is not very clear yet.**
+* RecordReader reads <key, value> pairs from an InputSplit.  
+**This Job input topic is not very clear tom me yet.**
 #### Task Side-Effect Files.
 In some applications, component tasks need to create and/or write to side-files, which differ from the actual job-output files. So this manages how the file will be saved and all that.
 #### Submitting jobs to queues.
@@ -160,7 +160,7 @@ In some applications, component tasks need to create and/or write to side-files,
 #### Distributed Cache
 * DistributedCache distributes application-specific, large, read-only files efficiently.
 * Applications specify the files to be cached via urls (hdfs://) in the Job. The DistributedCache assumes that the files specified via hdfs:// urls are already present on the FileSystem.
-* The files/archives can be distributed by setting the property mapreduce.job.cache.{files |archives}. If more than one file/archive has to be distributed, they can be added as comma separated paths. The properties can also be set by APIs Job.addCacheFile(URI)/ Job.addCacheArchive(URI) and Job.setCacheFiles(URI[])/ Job.setCacheArchives(URI[]) where URI is of the form hdfs://host:port/absolute-path#link-name. 
+* The files/archives can be distributed by setting the property mapreduce.job.cache.{files or archives}. If more than one file/archive has to be distributed, they can be added as comma separated paths. The properties can also be set by APIs Job.addCacheFile(URI)/ Job.addCacheArchive(URI) and Job.setCacheFiles(URI[])/ Job.setCacheArchives(URI[]) where URI is of the form hdfs://host:port/absolute-path#link-name. 
 * In Streaming, the files can be distributed through command line option -cacheFile/-cacheArchive.
 
 #### Profiling
