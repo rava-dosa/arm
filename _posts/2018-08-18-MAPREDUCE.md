@@ -149,7 +149,8 @@ InputFormat describes the input-specification for a MapReduce job.The MapReduce 
 * FileSplit is the default InputSplit. It sets mapreduce.map.input.file to the path of the input file for the logical split.  
 **RecordReader**
 * RecordReader reads <key, value> pairs from an InputSplit.  
-**This Job input topic is not very clear to me yet.**
+**This Job input topic is not very clear to me yet.**  
+
 #### Task Side-Effect Files.
 In some applications, component tasks need to create and/or write to side-files, which differ from the actual job-output files. So this manages how the file will be saved and all that.
 #### Submitting jobs to queues.
