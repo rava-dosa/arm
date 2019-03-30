@@ -775,7 +775,7 @@ td.gutter {
 
 @font-face {
   font-family: 'CarbonType';
-  src: url('CarbonType.eot?#iefix') format('embedded-opentype'),  url('CarbonType.woff') format('woff'), url('CarbonType.ttf')  format('truetype'), url('CarbonType.svg#CarbonType') format('svg');
+  src: url('/css/CarbonType.eot?#iefix') format('embedded-opentype'),  url('/css/CarbonType.woff') format('woff'), url('/css/CarbonType.ttf')  format('truetype'), url('/css/CarbonType.svg#CarbonType') format('svg');
   font-weight: normal;
   font-style: normal;
 }
