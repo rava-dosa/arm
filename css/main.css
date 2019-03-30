@@ -773,3 +773,6 @@ td.gutter {
   font-size: 16px;
 }
 
+.blog-post{
+  font-family: 'CarbonType' !important;
+}
