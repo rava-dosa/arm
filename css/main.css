@@ -10,11 +10,12 @@ layout: null
   src: url("/arm/css/GroteskLight.ttf") format("truetype");
 }
 body {
-  font-family: 'Lora', 'Times New Roman', serif;
+  font-family: 'GroteskLight' , 'Lora', 'Times New Roman', serif;
   font-variant-ligatures: no-common-ligatures;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-font-smoothing: antialiased;
   font-size: 18px;
+  letter-spacing: 0.119em;
   color: #404040;
   position: relative;
   background-color: {{ site.page-col }};
@@ -32,22 +33,6 @@ p {
   color: #1b2733;
 }
 
-li {
-  font-family: 'GroteskLight';
-  line-height: 1.5;
-  margin: 30px 0;
-  letter-spacing: 0.119em;
-  font-weight: 100;
-  color: #1b2733;
-}
-code {
-  font-family: 'GroteskLight';
-  line-height: 1.5;
-  margin: 30px 0;
-  letter-spacing: 0.119em;
-  font-weight: 100;
-  color: #1b2733;
-}
 
 h1,h2,h3,h4,h5,h6 {
   font-family: 'GroteskLight','Open Sans','Helvetica Neue', Helvetica, Arial, sans-serif;
