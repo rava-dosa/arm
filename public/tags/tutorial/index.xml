@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tutorial on Blog Test</title>
+    <link>http://rava-dosa.github.io/arm/tags/tutorial/</link>
+    <description>Recent content in tutorial on Blog Test</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://rava-dosa.github.io/arm/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dialogues on linux kernel-1</title>
+      <link>http://rava-dosa.github.io/arm/posts/2018-08-05-linux-kernel-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/posts/2018-08-05-linux-kernel-1/</guid>
+      <description>Architecture of Linux kernel {:class=&amp;ldquo;img-responsive&amp;rdquo;}
+Before We start This series is neither totally theoritical nor totally hands-on. It is amalgammation of both. Just the way I think. You will not become expert which should be implied.
+Adding a new module in linux kernel So linux kernel is a monolithic kernel. To be accurate it is Modular monolithic. Monolithic term in kernal is used in the sense of permission of code running there.</description>
+    </item>
+    
+    <item>
+      <title>Dialogues on linux kernel-2</title>
+      <link>http://rava-dosa.github.io/arm/posts/2018-08-06-linux-kernel-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/posts/2018-08-06-linux-kernel-2/</guid>
+      <description>Architecture of Linux kernel {:class=&amp;ldquo;img-responsive&amp;rdquo;}
+Before We start This series is neither totally theoritical nor totally hands-on. It is amalgammation of both. Just the way I think. You will not become expert which should be implied.
+What is Syscall ? System call is the programmatic way in which a computer program requests a service from the kernel of the operating system it is executed on. This may include hardware-related services (for example, accessing a hard disk drive), creation and execution of new processes, and communication with integral kernel services such as process scheduling.</description>
+    </item>
+    
+    <item>
+      <title>Dialogues on linux kernel-2</title>
+      <link>http://rava-dosa.github.io/arm/posts/2018-08-06-linux-kernel-3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/posts/2018-08-06-linux-kernel-3/</guid>
+      <description>Architecture of Linux kernel {:class=&amp;ldquo;img-responsive&amp;rdquo;}
+Before We start This series is neither totally theoritical nor totally hands-on. It is amalgammation of both. Just the way I think. You will not become expert which should be implied.
+What is hooking ? </description>
+    </item>
+    
+    <item>
+      <title>Dialogues on linux kernel-3</title>
+      <link>http://rava-dosa.github.io/arm/posts/2018-08-06-linux-kernel-4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/posts/2018-08-06-linux-kernel-4/</guid>
+      <description>Architecture of Linux kernel {:class=&amp;ldquo;img-responsive&amp;rdquo;}
+Before We start This series is neither totally theoritical nor totally hands-on. It is amalgammation of both. Just the way I think. You will not become expert which should be implied.
+? Command prefix &amp;ldquo;hdfs &amp;ldquo;:</description>
+    </item>
+    
+    <item>
+      <title>How to install tensorflow-gpu without shitting on your computer ?</title>
+      <link>http://rava-dosa.github.io/arm/posts/2018-08-02-tensorflow-gpu/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/posts/2018-08-02-tensorflow-gpu/</guid>
+      <description>Once upon a time There was a operating system called Ubuntu 14.04, I tried installing tensorflow gpu on that. And I was stuck in login loop as Tom cruise was stuck in time loop in the movie &amp;ldquo;The Edge of tomorrow&amp;rdquo;. I couldn&amp;rsquo;t get out of login loop until I installed Ubuntu 16.04
+Want to know how was my experience with ubuntu 16.04 In a very few[sarcastic laugh] steps I was able to install it.</description>
+    </item>
+    
+  </channel>
+</rss>

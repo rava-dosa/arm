@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Blog Test</title>
+    <link>http://rava-dosa.github.io/arm/tags/</link>
+    <description>Recent content in Tags on Blog Test</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://rava-dosa.github.io/arm/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>big-data</title>
+      <link>http://rava-dosa.github.io/arm/tags/big-data/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/tags/big-data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>compiler</title>
+      <link>http://rava-dosa.github.io/arm/tags/compiler/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/tags/compiler/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>distributed computing</title>
+      <link>http://rava-dosa.github.io/arm/tags/distributed-computing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/tags/distributed-computing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>distributed-system</title>
+      <link>http://rava-dosa.github.io/arm/tags/distributed-system/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/tags/distributed-system/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hardware</title>
+      <link>http://rava-dosa.github.io/arm/tags/hardware/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/tags/hardware/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>installation</title>
+      <link>http://rava-dosa.github.io/arm/tags/installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/tags/installation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>intel</title>
+      <link>http://rava-dosa.github.io/arm/tags/intel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/tags/intel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kernel</title>
+      <link>http://rava-dosa.github.io/arm/tags/kernel/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/tags/kernel/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>http://rava-dosa.github.io/arm/tags/linux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>os</title>
+      <link>http://rava-dosa.github.io/arm/tags/os/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/tags/os/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>http://rava-dosa.github.io/arm/tags/python/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scaling</title>
+      <link>http://rava-dosa.github.io/arm/tags/scaling/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/tags/scaling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>software</title>
+      <link>http://rava-dosa.github.io/arm/tags/software/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/tags/software/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>threading</title>
+      <link>http://rava-dosa.github.io/arm/tags/threading/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/tags/threading/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tutorial</title>
+      <link>http://rava-dosa.github.io/arm/tags/tutorial/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/tags/tutorial/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

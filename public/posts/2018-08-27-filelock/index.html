@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>How to make writing in a file, safe ? - Blog Test</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="General Architecture ![DB1](/img/Screenshot from 2018-08-27 18-09-19.png){:class=&ldquo;img-responsive&rdquo;}
+Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . This is an original content.
+Let&rsquo;s start Problem Statement -&gt; This is a distributed system. Multiple system is trying to read or write from a file, Now how to make it safe ? . Safe in the sense that how can sys 4 possibly know that sys 1 is writing in the file." />
+	<meta property="og:image" content="img/calvin-hobbes.png"/>
+	<meta property="og:title" content="How to make writing in a file, safe ?" />
+<meta property="og:description" content="General Architecture ![DB1](/img/Screenshot from 2018-08-27 18-09-19.png){:class=&ldquo;img-responsive&rdquo;}
+Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . This is an original content.
+Let&rsquo;s start Problem Statement -&gt; This is a distributed system. Multiple system is trying to read or write from a file, Now how to make it safe ? . Safe in the sense that how can sys 4 possibly know that sys 1 is writing in the file." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://rava-dosa.github.io/arm/posts/2018-08-27-filelock/" /><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="How to make writing in a file, safe ?"/>
+<meta name="twitter:description" content="General Architecture ![DB1](/img/Screenshot from 2018-08-27 18-09-19.png){:class=&ldquo;img-responsive&rdquo;}
+Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . This is an original content.
+Let&rsquo;s start Problem Statement -&gt; This is a distributed system. Multiple system is trying to read or write from a file, Now how to make it safe ? . Safe in the sense that how can sys 4 possibly know that sys 1 is writing in the file."/>
+<script src="http://rava-dosa.github.io/arm/js/feather.min.js"></script>
+	
+	
+        <link href="http://rava-dosa.github.io/arm/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://rava-dosa.github.io/arm/css/main.2f9b5946627215dc1ae7fa5f82bfc9cfcab000329136befeea5733f21e77d68f.css" />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://rava-dosa.github.io/arm/">Blog Test</a>
+	</div>
+	<nav>
+		
+		<a href="/arm/posts">All posts</a>
+		
+		<a href="/arm/til">TIL</a>
+		
+		<a href="/arm/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">How to make writing in a file, safe ?</h1>
+			<div class="meta">Posted on Jan 1, 0001</div>
+		</div>
+		
+
+		<section class="body">
+			<h3 id="general-architecture">General Architecture</h3>
+<p>![DB1](/img/Screenshot from 2018-08-27 18-09-19.png){:class=&ldquo;img-responsive&rdquo;}</p>
+<h3 id="before-we-start">Before We start</h3>
+<p>It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . This is an original content.</p>
+<h3 id="lets-start">Let&rsquo;s start</h3>
+<h4 id="problem-statement--">Problem Statement -&gt;</h4>
+<p>This is a distributed system. Multiple system is trying to read or write from a file, Now how to make it safe ? . Safe in the sense that how can sys 4 possibly know that sys 1 is writing in the file. or how can sys 2 and sys 3 can know that it can get stale data.</p>
+<h4 id="solution-1">Solution 1</h4>
+<p>As this is a totally controlled environment, we can write our code for write() in the file as, when any of the system loads file in it&rsquo;s own ram to edit or insert it creates a new file as filename.safe with edit permission to only that system. We can add multiple metadata in filename.safe. Then after completion of task by that system it will remove filename.safe. Now if the sytem 4 wants to write in filename then it will check first that if filename.safe exists or not, if not then it will write by creating .safe else it will wait till .safe is deleted. For reading you can write your read() fucntion as to return request with different code for stale request.</p>
+<h4 id="solution-2">Solution 2</h4>
+<p>We can write a file controller which will run on system 5 and it will record write request from different system with timestamp and execute it sequentially if some request take lot of time(that&rsquo;s why timestamp). I think this will be a better solution as it is non blocking in nature and server need not worry as there is only one agent writing to it. I think it is also consume less resource as no one has to continuously check it .safe file exist or not.</p>
+<h1 id="thats-all-folks">That&rsquo;s all folks.</h1>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a href="/arm/tags/big-data">big-data</a></li>
+					
+					<li><a href="/arm/tags/software">software</a></li>
+					
+					<li><a href="/arm/tags/distributed-system">distributed-system</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
+<hr><a class="soc" href="https://github.com/rava-dosa" title="GitHub"><i data-feather="github"></i></a>|<a class="soc" href="https://twitter.com/rava_dosa" title="Twitter"><i data-feather="twitter"></i></a>|⚡️
+	2022  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+</footer>
+
+
+<script>
+      feather.replace()
+</script></div>
+    </body>
+</html>

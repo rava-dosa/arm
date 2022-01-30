@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Scaling with MySQL - Blog Test</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Cluster of computers {:class=&ldquo;img-responsive&rdquo;}
+Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 .
+How to scale with MySQL ?  Replication Sharding  Replication In this process you replicate the main .db file to different machine.
+How general processes like update, insert, delete etc. works ? Generally in every cluster there are two groups of server, master and slave." />
+	<meta property="og:image" content="img/calvin-hobbes.png"/>
+	<meta property="og:title" content="Scaling with MySQL" />
+<meta property="og:description" content="Cluster of computers {:class=&ldquo;img-responsive&rdquo;}
+Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 .
+How to scale with MySQL ?  Replication Sharding  Replication In this process you replicate the main .db file to different machine.
+How general processes like update, insert, delete etc. works ? Generally in every cluster there are two groups of server, master and slave." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://rava-dosa.github.io/arm/posts/2018-08-06-scaling-mysql/" /><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Scaling with MySQL"/>
+<meta name="twitter:description" content="Cluster of computers {:class=&ldquo;img-responsive&rdquo;}
+Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 .
+How to scale with MySQL ?  Replication Sharding  Replication In this process you replicate the main .db file to different machine.
+How general processes like update, insert, delete etc. works ? Generally in every cluster there are two groups of server, master and slave."/>
+<script src="http://rava-dosa.github.io/arm/js/feather.min.js"></script>
+	
+	
+        <link href="http://rava-dosa.github.io/arm/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://rava-dosa.github.io/arm/css/main.2f9b5946627215dc1ae7fa5f82bfc9cfcab000329136befeea5733f21e77d68f.css" />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://rava-dosa.github.io/arm/">Blog Test</a>
+	</div>
+	<nav>
+		
+		<a href="/arm/posts">All posts</a>
+		
+		<a href="/arm/til">TIL</a>
+		
+		<a href="/arm/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Scaling with MySQL</h1>
+			<div class="meta">Posted on Jan 1, 0001</div>
+		</div>
+		
+
+		<section class="body">
+			<h3 id="cluster-of-computers">Cluster of computers</h3>
+<p><img src="https://qph.fs.quoracdn.net/main-qimg-f78e88e58d74f6a67092381fc56b6baa-c" alt="Beowulf-cluster">{:class=&ldquo;img-responsive&rdquo;}</p>
+<h3 id="before-we-start">Before We start</h3>
+<p>It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 .</p>
+<h3 id="how-to-scale-with-mysql-">How to scale with MySQL ?</h3>
+<ul>
+<li>Replication</li>
+<li>Sharding</li>
+</ul>
+<h3 id="replication">Replication</h3>
+<p>In this process you replicate the main .db file to different machine.</p>
+<h4 id="how-general-processes-like-update-insert-delete-etc-works-">How general processes like update, insert, delete etc. works ?</h4>
+<p>Generally in every cluster there are two groups of server, master and slave.<br>
+When using a mysql replication your application can read data from slave <strong>BUT</strong> but all modify operation occur through master server. All the update command like update, insert, delete etc.
+are sent to master, master records all request with date-time stamp(<strong>executes them on itself as well</strong>) in a log file called binlog. Now at any time(<em>I think it might be scheduled to check after x-seconds</em>) slave server can connect to master server and ask for binlog file by providing it&rsquo;s own last statement executed by that server. Server responds with requests after that statement sent by slave server. Hence it&rsquo;s a stateful transaction.</p>
+<h4 id="what-to-do-if-master-fails-">What to do if Master fails ?</h4>
+<p>Logically take any slave(or the most updated one) and do update using binlog manually or automate that process and make it the new master with binlog of old master or You can also have multiple master and distribute the work that for insert statement go to master 1 or for update go to master-2. In the case of multiple master each master is technically a slave with greater permission, Just like humans. There will be other use case which we have to take care like we have to update master before updating slave, like you have to hold slave request before updating master B. But this logic will lead to bottle-neck.</p>
+<h4 id="cons">Cons</h4>
+<ul>
+<li>Not good for application like google docs, github, or pastebin, which is write-heavy application.</li>
+<li>If there is large data you will have storage issues.</li>
+<li>Slave can return stale(unupdated) data.</li>
+</ul>
+<h4 id="other-points-to-take-care-before-we-move-to-sharding">Other points to take care before we move to sharding</h4>
+<ul>
+<li>Active Data set-&gt; Set of all data that is frequently accessed by user. It is important to think about the active data set because too much active data will lead to increase in cache size. And what and how you define active is also important. Before setting threshold you have to check user pattern.</li>
+</ul>
+<h3 id="sharding">Sharding</h3>
+<p>Divide the dataset in smaller part and assign each part to a single server.</p>
+<h4 id="sharding-key">Sharding key</h4>
+<p>Key used to identify which data resides in which server. Such as in a counter-strike server, it might be like position of user1 is saved in one shard and sharding-key is user1 id. But you have to have some algorithm to map similar to hash table to map server and shard.</p>
+<h4 id="cons-1">Cons</h4>
+<ul>
+<li>It will be slow for queries involving multiple shard.</li>
+<li>You lose ACID as whole not just in shards.</li>
+<li>You can not ensure that all shards are updated simultaneously</li>
+</ul>
+<h4 id="acid-transactions">ACID Transactions</h4>
+<ul>
+<li>Atomicity-&gt; An atomic transaction is executed in it&rsquo;s entirety. Either it&rsquo;s executed or reverted.</li>
+<li>Consistency-&gt; Every transaction transforms dataset from one consistent to other consistent state.</li>
+<li>Isolation -&gt; It guarentees that transaction can run in parallel without affecting each other.</li>
+<li>Durability -&gt; Once a transaction happens it is not lost.</li>
+</ul>
+<h3 id="postscript">PostScript</h3>
+<p>Refer me a book or website or topic for this topic if you have some real life experience with these type of system.</p>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a href="/arm/tags/scaling">scaling</a></li>
+					
+					<li><a href="/arm/tags/software">software</a></li>
+					
+					<li><a href="/arm/tags/distributed-system">distributed-system</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
+<hr><a class="soc" href="https://github.com/rava-dosa" title="GitHub"><i data-feather="github"></i></a>|<a class="soc" href="https://twitter.com/rava_dosa" title="Twitter"><i data-feather="twitter"></i></a>|⚡️
+	2022  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+</footer>
+
+
+<script>
+      feather.replace()
+</script></div>
+    </body>
+</html>

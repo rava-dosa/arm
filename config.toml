@@ -1,5 +1,50 @@
 baseURL = 'http://rava-dosa.github.io/arm/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'Blog Test'
 theme = 'archie'
+# Code Highlight
+pygmentsstyle = "github"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+paginate=5 # articles per page
+# googleAnalytics = "UA-179536383-1"
+
+[params]
+	mode="light" # color-mode → light,dark or auto
+	useCDN=false # don't use CDNs for fonts and icons, instead serve them locally.
+	subtitle = "Notes on programming and life"
+	og_image = "img/calvin-hobbes.png"
+	umami = true
+
+# Social Tags
+
+[[params.social]]
+name = "GitHub"
+icon = "github"
+url = "https://github.com/rava-dosa"
+
+[[params.social]]
+name = "Twitter"
+icon = "twitter"
+url = "https://twitter.com/rava_dosa"
+
+# Main menu Items
+
+
+[[menu.main]]
+name = "All posts"
+url = "/posts"
+weight = 1
+
+[[menu.main]]
+name = "TIL"
+url = "/til"
+weight = 2
+
+[[menu.main]]
+name = "Tags"
+url = "/tags"
+weight = 3
+
 publishDir = 'docs'

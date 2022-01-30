@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>How to install tensorflow-gpu without shitting on your computer ? - Blog Test</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Once upon a time There was a operating system called Ubuntu 14.04, I tried installing tensorflow gpu on that. And I was stuck in login loop as Tom cruise was stuck in time loop in the movie &ldquo;The Edge of tomorrow&rdquo;. I couldn&rsquo;t get out of login loop until I installed Ubuntu 16.04
+Want to know how was my experience with ubuntu 16.04 In a very few[sarcastic laugh] steps I was able to install it." />
+	<meta property="og:image" content="img/calvin-hobbes.png"/>
+	<meta property="og:title" content="How to install tensorflow-gpu without shitting on your computer ?" />
+<meta property="og:description" content="Once upon a time There was a operating system called Ubuntu 14.04, I tried installing tensorflow gpu on that. And I was stuck in login loop as Tom cruise was stuck in time loop in the movie &ldquo;The Edge of tomorrow&rdquo;. I couldn&rsquo;t get out of login loop until I installed Ubuntu 16.04
+Want to know how was my experience with ubuntu 16.04 In a very few[sarcastic laugh] steps I was able to install it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://rava-dosa.github.io/arm/posts/2018-08-02-tensorflow-gpu/" /><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="How to install tensorflow-gpu without shitting on your computer ?"/>
+<meta name="twitter:description" content="Once upon a time There was a operating system called Ubuntu 14.04, I tried installing tensorflow gpu on that. And I was stuck in login loop as Tom cruise was stuck in time loop in the movie &ldquo;The Edge of tomorrow&rdquo;. I couldn&rsquo;t get out of login loop until I installed Ubuntu 16.04
+Want to know how was my experience with ubuntu 16.04 In a very few[sarcastic laugh] steps I was able to install it."/>
+<script src="http://rava-dosa.github.io/arm/js/feather.min.js"></script>
+	
+	
+        <link href="http://rava-dosa.github.io/arm/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://rava-dosa.github.io/arm/css/main.2f9b5946627215dc1ae7fa5f82bfc9cfcab000329136befeea5733f21e77d68f.css" />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://rava-dosa.github.io/arm/">Blog Test</a>
+	</div>
+	<nav>
+		
+		<a href="/arm/posts">All posts</a>
+		
+		<a href="/arm/til">TIL</a>
+		
+		<a href="/arm/tags">Tags</a>
+		
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">How to install tensorflow-gpu without shitting on your computer ?</h1>
+			<div class="meta">Posted on Jan 1, 0001</div>
+		</div>
+		
+
+		<section class="body">
+			<h3 id="once-upon-a-time">Once upon a time</h3>
+<p>There was a operating system called Ubuntu 14.04, I tried installing tensorflow gpu on that.
+And I was stuck in login loop as Tom cruise was stuck in time loop in the movie &ldquo;The Edge of tomorrow&rdquo;. I couldn&rsquo;t get out of login loop until I installed Ubuntu 16.04</p>
+<h3 id="want-to-know-how-was-my-experience-with-ubuntu-1604">Want to know how was my experience with ubuntu 16.04</h3>
+<p>In a very few[<strong>sarcastic laugh</strong>] steps I was able to install it.</p>
+<ol>
+<li>sudo apt-get &ndash;purge remove nvidia-*</li>
+<li>sudo apt-get autoremove</li>
+<li>sudo apt-get update</li>
+<li>sudo gedit /etc/modprobe.d/blacklist-nouveau.conf<br>
+<strong>paste</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">blacklist nouveau
+blacklist lbm-nouveau
+options nouveau modeset=0
+alias nouveau off
+alias lbm-nouveau off
+</code></pre></div><ol start="5">
+<li><code>echo options nouveau modeset=0 | sudo tee -a /etc/modprobe.d/nouveau-kms.conf</code></li>
+<li>sudo update-initramfs -u</li>
+<li>sudo apt-get update</li>
+<li>sudo apt-get upgrade -y</li>
+<li>sudo apt-get dist-upgrade -y</li>
+<li>sudo apt-get install build-essential</li>
+<li>sudo apt-get install linux-image-extra-virtual</li>
+<li>sudo apt-get install linux-source</li>
+<li>sudo apt-get source linux-image-$(uname -r)</li>
+<li>sudo apt-get install linux-headers-$(uname -r)</li>
+<li>wget -O cuda_8_linux.run <a href="https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda_8.0.61_375.26_linux-run">https://developer.nvidia.com/compute/cuda/8.0/Prod2/local_installers/cuda_8.0.61_375.26_linux-run</a></li>
+<li>sudo chmod +x cuda_8_linux.run</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#in tty ctrl+alt+f1 or ctrl + alt +f6
+sudo service lightdm stop 
+#or if you are using gnome 3 then
+sudo service gdm3 stop
+sudo ./cuda_8_linux.run
+</code></pre></div><ol start="17">
+<li>sudo service gdm3 stop</li>
+<li>sudo ./cuda_8_linux.run</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#Do you accept the previously read EULA?
+#accept
+#Install NVIDIA Accelerated Graphics Driver for Linux-x86_64 367.48?
+#n (we installed drivers previously)
+#Install the CUDA 8.0 Toolkit?
+#y
+#Enter Toolkit Location:
+# /usr/local/cuda-8.0 (enter)
+# Do you wish to run the installation with ‚sudo’?
+# y
+# Do you want to install a symbolic link at /usr/local/cuda?
+# y 
+# Install the CUDA 8.0 Samples?
+# y 
+# Enter CUDA Samples Location:
+# enter 
+# Install cuDNN
+# go to website and download cudnn-8.1 https://developer.nvidia.com/cudnn
+</code></pre></div><ol start="19">
+<li>
+<p>tar -zxvf cudnn-8.1-linux-x64-v5.1.tgz</p>
+</li>
+<li>
+<p>copy libs to /usr/local/cuda folder</p>
+</li>
+<li>
+<p>sudo cp -P cuda/include/cudnn.h /usr/local/cuda/include</p>
+</li>
+<li>
+<p>sudo cp -P cuda/lib64/libcudnn* /usr/local/cuda/lib64</p>
+</li>
+<li>
+<p>sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*</p>
+</li>
+<li>
+<p>sudo add-apt-repository ppa:graphics-drivers/ppa</p>
+</li>
+<li>
+<p>sudo apt-get update</p>
+</li>
+<li>
+<p>sudo apt-get install nvidia-375</p>
+</li>
+<li>
+<p>sudo apt-get install libcupti-dev</p>
+</li>
+</ol>
+<h6 id="once-nvidia-driver-is-installed-restart-the-computer-you-can-verify-the-driver-using-the-following-command">Once nvidia driver is installed, restart the computer. You can verify the driver using the following command.</h6>
+<ol start="28">
+<li>cat /proc/driver/nvidia/version</li>
+<li>echo &lsquo;export PATH=/usr/local/cuda/bin:$PATH&rsquo; &raquo; ~/.bashrc</li>
+<li>sudo apt-get install python-numpy python-dev python-pip python-wheel</li>
+</ol>
+<h6 id="download-bazel">Download Bazel</h6>
+<ol start="31">
+<li>chmod +x bazel-0.5.2-installer-linux-x86_64.sh</li>
+<li>./bazel-0.5.2-installer-linux-x86_64.sh &ndash;user</li>
+</ol>
+<h6 id="paste-in-bashrc">paste in bashrc</h6>
+<ol start="34">
+<li>export PATH=&quot;$PATH:$HOME/bin&quot;</li>
+</ol>
+<h6 id="httpswwwanacondacomdownload-install-anaconda"><a href="https://www.anaconda.com/download/">https://www.anaconda.com/download/</a> install anaconda</h6>
+<h6 id="add-these-two-lines-in-gedit-bashrc">Add these two lines in gedit ~/.bashrc</h6>
+<ol start="35">
+<li>export LD_LIBRARY_PATH=&quot;$LD_LIBRARY_PATH:/usr/local/cuda/lib64&quot;</li>
+<li>export CUDA_HOME=/usr/local/cuda</li>
+<li>conda create -n tensorflow</li>
+<li>source activate tensorflow</li>
+<li>pip install &ndash;ignore-installed &ndash;upgrade \ <a href="https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.0.0-cp27-none-linux_x86_64.whl">https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.0.0-cp27-none-linux_x86_64.whl</a></li>
+</ol>
+<h3 id="but-as-time-has-passed-by">But as time has passed by&hellip;&hellip;&hellip;&hellip;..</h3>
+<p>Things have changed a lot.Now on new ubuntu 18.04 you don&rsquo;t need to do all this, Things have become relatively easy:<br>
+(<strong>Even though I installed conda packages first</strong>)</p>
+<ol>
+<li>sudo apt-get &ndash;purge remove nvidia-*</li>
+<li>sudo apt-get autoremove</li>
+<li>sudo add-apt-repository ppa:graphics-drivers/ppa</li>
+<li>sudo apt-get update</li>
+<li>sudo apt-get install nvidia-375</li>
+<li>sudo reboot</li>
+<li>wget <a href="https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh">https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh</a>
+7.1. bash Anaconda3-5.2.0-Linux-x86_64.sh<br>
+<strong>While installation,when asked about adding path,say yes.</strong></li>
+<li>source ~/.bashrc</li>
+<li>conda update conda</li>
+<li>conda update anaconda</li>
+<li>conda update python</li>
+<li>conda update &ndash;all</li>
+<li>conda create &ndash;name tf-gpu</li>
+<li>source activate tf-gpu</li>
+<li>conda install tensorflow-gpu<br>
+<code>I tried this and it worked. So now if you want to check if gpu device is recognized or not:</code></li>
+<li>python<br>
+16.1. import tensorflow as tf</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">with tf.device(&#39;/gpu:0&#39;):
+    a = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[2, 3], name=&#39;a&#39;)
+    b = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0], shape=[3, 2], name=&#39;b&#39;)  
+    c = tf.matmul(a, b)  
+with tf.Session() as sess:  
+    print (sess.run(c))
+</code></pre></div><ol start="17">
+<li>That&rsquo;s it you are done with installation.</li>
+<li><a href="https://gist.github.com/rava-dosa/75a04514ad6864b1eb0eee6c9821143a">Reference</a></li>
+</ol>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a href="/arm/tags/tutorial">tutorial</a></li>
+					
+					<li><a href="/arm/tags/software">software</a></li>
+					
+					<li><a href="/arm/tags/installation">installation</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
+<hr><a class="soc" href="https://github.com/rava-dosa" title="GitHub"><i data-feather="github"></i></a>|<a class="soc" href="https://twitter.com/rava_dosa" title="Twitter"><i data-feather="twitter"></i></a>|⚡️
+	2022  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+</footer>
+
+
+<script>
+      feather.replace()
+</script></div>
+    </body>
+</html>
