@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html><head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Monologue on python - My New Hugo Site</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Monologue on python - Blog Test</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="{:class=&ldquo;img-responsive&rdquo;}
 Different type of python Some notable mention wrt linux:
  Cpython -&gt; CPython is the original Python implementation PyPy -&gt; A fast python implementation with a JIT compiler Jython -&gt; Python running on the Java Virtual Machine  Profiling and optimizing python Timing function
 {% highlight python linenos %}
 import time from functools import wraps import random
 def timing(f): def wrap(*args): time1 = time.time() ret = f(*args) time2 = time." />
-	<meta property="og:image" content=""/>
+	<meta property="og:image" content="img/calvin-hobbes.png"/>
 	<meta property="og:title" content="Monologue on python" />
 <meta property="og:description" content="{:class=&ldquo;img-responsive&rdquo;}
 Different type of python Some notable mention wrt linux:
@@ -29,7 +29,8 @@ Different type of python Some notable mention wrt linux:
 {% highlight python linenos %}
 import time from functools import wraps import random
 def timing(f): def wrap(*args): time1 = time.time() ret = f(*args) time2 = time."/>
-
+<script src="http://rava-dosa.github.io/arm/js/feather.min.js"></script>
+	
 	
         <link href="http://rava-dosa.github.io/arm/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
 	
@@ -42,9 +43,15 @@ def timing(f): def wrap(*args): time1 = time.time() ret = f(*args) time2 = time.
 <body>
         <div class="content"><header>
 	<div class="main">
-		<a href="http://rava-dosa.github.io/arm/">My New Hugo Site</a>
+		<a href="http://rava-dosa.github.io/arm/">Blog Test</a>
 	</div>
 	<nav>
+		
+		<a href="/arm/posts">All posts</a>
+		
+		<a href="/arm/til">TIL</a>
+		
+		<a href="/arm/tags">Tags</a>
 		
 		
 	</nav>
@@ -308,11 +315,13 @@ print i</p>
 	</article>
 </main>
 <footer>
-<hr>⚡️
+<hr><a class="soc" href="https://github.com/rava-dosa" title="GitHub"><i data-feather="github"></i></a>|<a class="soc" href="https://twitter.com/rava_dosa" title="Twitter"><i data-feather="twitter"></i></a>|⚡️
 	2022  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
 </footer>
 
 
-</div>
+<script>
+      feather.replace()
+</script></div>
     </body>
 </html>

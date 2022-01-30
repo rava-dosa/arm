@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html><head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Dialogues on YARN() - My New Hugo Site</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Dialogues on YARN() - Blog Test</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="General Architecture {:class=&ldquo;img-responsive&rdquo;}
 Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . I will be copying the whole content from official documentation.
 Let&rsquo;s start Kafka has three main components-&gt;  A Producer: The service that emits the source data. A Broker: Kafka acts as an intermediary between the producer and the consumer. It uses the power of API&rsquo;s to get and broadcast data A Consumer: The service that uses the data which the broker will broadcast." />
-	<meta property="og:image" content=""/>
+	<meta property="og:image" content="img/calvin-hobbes.png"/>
 	<meta property="og:title" content="Dialogues on YARN()" />
 <meta property="og:description" content="General Architecture {:class=&ldquo;img-responsive&rdquo;}
 Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . I will be copying the whole content from official documentation.
@@ -20,7 +20,8 @@ Let&rsquo;s start Kafka has three main components-&gt;  A Producer: The service 
 <meta name="twitter:description" content="General Architecture {:class=&ldquo;img-responsive&rdquo;}
 Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . I will be copying the whole content from official documentation.
 Let&rsquo;s start Kafka has three main components-&gt;  A Producer: The service that emits the source data. A Broker: Kafka acts as an intermediary between the producer and the consumer. It uses the power of API&rsquo;s to get and broadcast data A Consumer: The service that uses the data which the broker will broadcast."/>
-
+<script src="http://rava-dosa.github.io/arm/js/feather.min.js"></script>
+	
 	
         <link href="http://rava-dosa.github.io/arm/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
 	
@@ -33,9 +34,15 @@ Let&rsquo;s start Kafka has three main components-&gt;  A Producer: The service 
 <body>
         <div class="content"><header>
 	<div class="main">
-		<a href="http://rava-dosa.github.io/arm/">My New Hugo Site</a>
+		<a href="http://rava-dosa.github.io/arm/">Blog Test</a>
 	</div>
 	<nav>
+		
+		<a href="/arm/posts">All posts</a>
+		
+		<a href="/arm/til">TIL</a>
+		
+		<a href="/arm/tags">Tags</a>
 		
 		
 	</nav>
@@ -86,24 +93,24 @@ The Consumer API allows applications to read streams of data from topics in the 
 What is tenancy -&gt;  (&ldquo;software multitenancy&rdquo; refers to a software architecture in which a single instance of software runs on a server and serves multiple tenants. A tenant is a group of users who share a common access with specific privileges to the software instance.)
 Administrators can define and enforce quotas on requests to control the broker resources that are used by clients.</p>
 <h4 id="class-kafkaproducer">Class KafkaProducer</h4>
-<pre tabindex="0"><code> Properties props = new Properties();
- props.put(&quot;bootstrap.servers&quot;, &quot;localhost:9092&quot;);
- props.put(&quot;acks&quot;, &quot;all&quot;);
- props.put(&quot;retries&quot;, 0);
- props.put(&quot;batch.size&quot;, 16384);
- props.put(&quot;linger.ms&quot;, 1);
- props.put(&quot;buffer.memory&quot;, 33554432);
- props.put(&quot;key.serializer&quot;, &quot;org.apache.kafka.common.serialization.StringSerializer&quot;);
- props.put(&quot;value.serializer&quot;, &quot;org.apache.kafka.common.serialization.StringSerializer&quot;);
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"> Properties props = new Properties();
+ props.put(&#34;bootstrap.servers&#34;, &#34;localhost:9092&#34;);
+ props.put(&#34;acks&#34;, &#34;all&#34;);
+ props.put(&#34;retries&#34;, 0);
+ props.put(&#34;batch.size&#34;, 16384);
+ props.put(&#34;linger.ms&#34;, 1);
+ props.put(&#34;buffer.memory&#34;, 33554432);
+ props.put(&#34;key.serializer&#34;, &#34;org.apache.kafka.common.serialization.StringSerializer&#34;);
+ props.put(&#34;value.serializer&#34;, &#34;org.apache.kafka.common.serialization.StringSerializer&#34;);
 
  Producer&lt;String, String&gt; producer = new KafkaProducer&lt;&gt;(props);
  for (int i = 0; i &lt; 100; i++)
-     producer.send(new ProducerRecord&lt;String, String&gt;(&quot;my-topic&quot;, Integer.toString(i), Integer.toString(i)));
+     producer.send(new ProducerRecord&lt;String, String&gt;(&#34;my-topic&#34;, Integer.toString(i), Integer.toString(i)));
 
  producer.close();
-</code></pre><pre tabindex="0"><code> Properties props = new Properties();
- props.put(&quot;bootstrap.servers&quot;, &quot;localhost:9092&quot;);
- props.put(&quot;transactional.id&quot;, &quot;my-transactional-id&quot;);
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"> Properties props = new Properties();
+ props.put(&#34;bootstrap.servers&#34;, &#34;localhost:9092&#34;);
+ props.put(&#34;transactional.id&#34;, &#34;my-transactional-id&#34;);
  Producer&lt;String, String&gt; producer = new KafkaProducer&lt;&gt;(props, new StringSerializer(), new StringSerializer());
 
  producer.initTransactions();
@@ -111,65 +118,65 @@ Administrators can define and enforce quotas on requests to control the broker r
  try {
      producer.beginTransaction();
      for (int i = 0; i &lt; 100; i++)
-         producer.send(new ProducerRecord&lt;&gt;(&quot;my-topic&quot;, Integer.toString(i), Integer.toString(i)));
+         producer.send(new ProducerRecord&lt;&gt;(&#34;my-topic&#34;, Integer.toString(i), Integer.toString(i)));
      producer.commitTransaction();
  } catch (ProducerFencedException | OutOfOrderSequenceException | AuthorizationException e) {
-     // We can't recover from these exceptions, so our only option is to close the producer and exit.
+     // We can&#39;t recover from these exceptions, so our only option is to close the producer and exit.
      producer.close();
  } catch (KafkaException e) {
      // For all other exceptions, just abort the transaction and try again.
      producer.abortTransaction();
  }
  producer.close();
-</code></pre><p>There can be only one open transaction per producer. All messages sent between the beginTransaction() and commitTransaction() calls will be part of a single transaction. When the transactional.id is specified, all messages sent by the producer must be part of a transaction.
+</code></pre></div><p>There can be only one open transaction per producer. All messages sent between the beginTransaction() and commitTransaction() calls will be part of a single transaction. When the transactional.id is specified, all messages sent by the producer must be part of a transaction.
 the send call is asynchronous it returns a Future for the RecordMetadata that will be assigned to this record. Invoking get() on this future will block until the associated request completes and then return the metadata for the record or throw any exception that occurred while sending the record.If you want to simulate a simple blocking call you can call the get() method immediately:</p>
-<pre tabindex="0"><code> byte[] key = &quot;key&quot;.getBytes();
- byte[] value = &quot;value&quot;.getBytes();
- ProducerRecord&lt;byte[],byte[]&gt; record = new ProducerRecord&lt;byte[],byte[]&gt;(&quot;my-topic&quot;, key, value)
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"> byte[] key = &#34;key&#34;.getBytes();
+ byte[] value = &#34;value&#34;.getBytes();
+ ProducerRecord&lt;byte[],byte[]&gt; record = new ProducerRecord&lt;byte[],byte[]&gt;(&#34;my-topic&#34;, key, value)
  producer.send(record).get();
-</code></pre><p>Fully non-blocking usage can make use of the Callback parameter to provide a callback that will be invoked when the request is complete.</p>
-<pre tabindex="0"><code> ProducerRecord&lt;byte[],byte[]&gt; record = new ProducerRecord&lt;byte[],byte[]&gt;(&quot;the-topic&quot;, key, value);
+</code></pre></div><p>Fully non-blocking usage can make use of the Callback parameter to provide a callback that will be invoked when the request is complete.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"> ProducerRecord&lt;byte[],byte[]&gt; record = new ProducerRecord&lt;byte[],byte[]&gt;(&#34;the-topic&#34;, key, value);
  producer.send(myRecord,
                new Callback() {
                    public void onCompletion(RecordMetadata metadata, Exception e) {
                        if(e != null) {
                           e.printStackTrace();
                        } else {
-                          System.out.println(&quot;The offset of the record we just sent is: &quot; + metadata.offset());
+                          System.out.println(&#34;The offset of the record we just sent is: &#34; + metadata.offset());
                        }
                    }
                });
-</code></pre><p>Callbacks for records being sent to the same partition are guaranteed to execute in order. That is, in the following example callback1 is guaranteed to execute before callback2:</p>
-<pre tabindex="0"><code> producer.send(new ProducerRecord&lt;byte[],byte[]&gt;(topic, partition, key1, value1), callback1);
+</code></pre></div><p>Callbacks for records being sent to the same partition are guaranteed to execute in order. That is, in the following example callback1 is guaranteed to execute before callback2:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"> producer.send(new ProducerRecord&lt;byte[],byte[]&gt;(topic, partition, key1, value1), callback1);
  producer.send(new ProducerRecord&lt;byte[],byte[]&gt;(topic, partition, key2, value2), callback2);
-</code></pre><p><a href="https://kafka.apache.org/20/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html">Detail</a></p>
+</code></pre></div><p><a href="https://kafka.apache.org/20/javadoc/index.html?org/apache/kafka/clients/producer/KafkaProducer.html">Detail</a></p>
 <h4 id="consumer-api">Consumer API</h4>
 <h5 id="automatic-offset-committing">Automatic Offset Committing</h5>
 <p>This example demonstrates a simple usage of Kafka&rsquo;s consumer api that relies on automatic offset committing.</p>
-<pre tabindex="0"><code>     Properties props = new Properties();
-     props.put(&quot;bootstrap.servers&quot;, &quot;localhost:9092&quot;);
-     props.put(&quot;group.id&quot;, &quot;test&quot;);
-     props.put(&quot;enable.auto.commit&quot;, &quot;true&quot;);
-     props.put(&quot;auto.commit.interval.ms&quot;, &quot;1000&quot;);
-     props.put(&quot;key.deserializer&quot;, &quot;org.apache.kafka.common.serialization.StringDeserializer&quot;);
-     props.put(&quot;value.deserializer&quot;, &quot;org.apache.kafka.common.serialization.StringDeserializer&quot;);
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">     Properties props = new Properties();
+     props.put(&#34;bootstrap.servers&#34;, &#34;localhost:9092&#34;);
+     props.put(&#34;group.id&#34;, &#34;test&#34;);
+     props.put(&#34;enable.auto.commit&#34;, &#34;true&#34;);
+     props.put(&#34;auto.commit.interval.ms&#34;, &#34;1000&#34;);
+     props.put(&#34;key.deserializer&#34;, &#34;org.apache.kafka.common.serialization.StringDeserializer&#34;);
+     props.put(&#34;value.deserializer&#34;, &#34;org.apache.kafka.common.serialization.StringDeserializer&#34;);
      KafkaConsumer&lt;String, String&gt; consumer = new KafkaConsumer&lt;&gt;(props);
-     consumer.subscribe(Arrays.asList(&quot;foo&quot;, &quot;bar&quot;));
+     consumer.subscribe(Arrays.asList(&#34;foo&#34;, &#34;bar&#34;));
      while (true) {
          ConsumerRecords&lt;String, String&gt; records = consumer.poll(100);
          for (ConsumerRecord&lt;String, String&gt; record : records)
-             System.out.printf(&quot;offset = %d, key = %s, value = %s%n&quot;, record.offset(), record.key(), record.value());
+             System.out.printf(&#34;offset = %d, key = %s, value = %s%n&#34;, record.offset(), record.key(), record.value());
      }
-</code></pre><p>Setting enable.auto.commit means that offsets are committed automatically with a frequency controlled by the config auto.commit.interval.ms. The deserializer settings specify how to turn bytes into objects. For example, by specifying string deserializers, we are saying that our record&rsquo;s key and value will just be simple strings.</p>
+</code></pre></div><p>Setting enable.auto.commit means that offsets are committed automatically with a frequency controlled by the config auto.commit.interval.ms. The deserializer settings specify how to turn bytes into objects. For example, by specifying string deserializers, we are saying that our record&rsquo;s key and value will just be simple strings.</p>
 <h5 id="manual-offset-control">Manual Offset Control</h5>
-<pre tabindex="0"><code>     Properties props = new Properties();
-     props.put(&quot;bootstrap.servers&quot;, &quot;localhost:9092&quot;);
-     props.put(&quot;group.id&quot;, &quot;test&quot;);
-     props.put(&quot;enable.auto.commit&quot;, &quot;false&quot;);
-     props.put(&quot;key.deserializer&quot;, &quot;org.apache.kafka.common.serialization.StringDeserializer&quot;);
-     props.put(&quot;value.deserializer&quot;, &quot;org.apache.kafka.common.serialization.StringDeserializer&quot;);
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">     Properties props = new Properties();
+     props.put(&#34;bootstrap.servers&#34;, &#34;localhost:9092&#34;);
+     props.put(&#34;group.id&#34;, &#34;test&#34;);
+     props.put(&#34;enable.auto.commit&#34;, &#34;false&#34;);
+     props.put(&#34;key.deserializer&#34;, &#34;org.apache.kafka.common.serialization.StringDeserializer&#34;);
+     props.put(&#34;value.deserializer&#34;, &#34;org.apache.kafka.common.serialization.StringDeserializer&#34;);
      KafkaConsumer&lt;String, String&gt; consumer = new KafkaConsumer&lt;&gt;(props);
-     consumer.subscribe(Arrays.asList(&quot;foo&quot;, &quot;bar&quot;));
+     consumer.subscribe(Arrays.asList(&#34;foo&#34;, &#34;bar&#34;));
      final int minBatchSize = 200;
      List&lt;ConsumerRecord&lt;String, String&gt;&gt; buffer = new ArrayList&lt;&gt;();
      while (true) {
@@ -183,14 +190,14 @@ the send call is asynchronous it returns a Future for the RecordMetadata that wi
              buffer.clear();
          }
      }
-</code></pre><p>The committed offset should always be the offset of the next message that your application will read. Thus, when calling commitSync(offsets) you should add one to the offset of the last message processed.</p>
-<pre tabindex="0"><code>     try {
+</code></pre></div><p>The committed offset should always be the offset of the next message that your application will read. Thus, when calling commitSync(offsets) you should add one to the offset of the last message processed.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">     try {
          while(running) {
              ConsumerRecords&lt;String, String&gt; records = consumer.poll(Long.MAX_VALUE);
              for (TopicPartition partition : records.partitions()) {
                  List&lt;ConsumerRecord&lt;String, String&gt;&gt; partitionRecords = records.records(partition);
                  for (ConsumerRecord&lt;String, String&gt; record : partitionRecords) {
-                     System.out.println(record.offset() + &quot;: &quot; + record.value());
+                     System.out.println(record.offset() + &#34;: &#34; + record.value());
                  }
                  long lastOffset = partitionRecords.get(partitionRecords.size() - 1).offset();
                  consumer.commitSync(Collections.singletonMap(partition, new OffsetAndMetadata(lastOffset + 1)));
@@ -199,20 +206,20 @@ the send call is asynchronous it returns a Future for the RecordMetadata that wi
      } finally {
        consumer.close();
      }
-</code></pre><h5 id="manual-partition-assignment">Manual Partition Assignment</h5>
-<pre tabindex="0"><code>     String topic = &quot;foo&quot;;
+</code></pre></div><h5 id="manual-partition-assignment">Manual Partition Assignment</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">     String topic = &#34;foo&#34;;
      TopicPartition partition0 = new TopicPartition(topic, 0);
      TopicPartition partition1 = new TopicPartition(topic, 1);
      consumer.assign(Arrays.asList(partition0, partition1));
-</code></pre><h5 id="multi-threaded-processing">Multi-threaded Processing</h5>
+</code></pre></div><h5 id="multi-threaded-processing">Multi-threaded Processing</h5>
 <p>The Kafka consumer is NOT thread-safe. All network I/O happens in the thread of the application making the call. It is the responsibility of the user to ensure that multi-threaded access is properly synchronized. Un-synchronized access will result in ConcurrentModificationException.</p>
-<pre tabindex="0"><code> public class KafkaConsumerRunner implements Runnable {
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"> public class KafkaConsumerRunner implements Runnable {
      private final AtomicBoolean closed = new AtomicBoolean(false);
      private final KafkaConsumer consumer;
 
      public void run() {
          try {
-             consumer.subscribe(Arrays.asList(&quot;topic&quot;));
+             consumer.subscribe(Arrays.asList(&#34;topic&#34;));
              while (!closed.get()) {
                  ConsumerRecords records = consumer.poll(Duration.ofMillis(10000));
                  // Handle new records
@@ -232,13 +239,13 @@ the send call is asynchronous it returns a Future for the RecordMetadata that wi
      }
  }
  
-</code></pre><p>Then in a separate thread, the consumer can be shutdown by setting the closed flag and waking up the consumer.</p>
-<pre tabindex="0"><code>     closed.set(true);
+</code></pre></div><p>Then in a separate thread, the consumer can be shutdown by setting the closed flag and waking up the consumer.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">     closed.set(true);
      consumer.wakeup();
-</code></pre><p>Note that while it is possible to use thread interrupts instead of wakeup() to abort a blocking operation (in which case, InterruptException will be raised), we discourage their use since they may cause a clean shutdown of the consumer to be aborted.
+</code></pre></div><p>Note that while it is possible to use thread interrupts instead of wakeup() to abort a blocking operation (in which case, InterruptException will be raised), we discourage their use since they may cause a clean shutdown of the consumer to be aborted.
 <a href="https://kafka.apache.org/20/javadoc/index.html?org/apache/kafka/clients/consumer/KafkaConsumer.html">Detail</a></p>
 <h4 id="kafka-streams">Kafka Streams</h4>
-<pre tabindex="0"><code>import org.apache.kafka.common.serialization.Serdes;
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.common.utils.Bytes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -256,18 +263,18 @@ public class WordCountApplication {
  
     public static void main(final String[] args) throws Exception {
         Properties props = new Properties();
-        props.put(StreamsConfig.APPLICATION_ID_CONFIG, &quot;wordcount-application&quot;);
-        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, &quot;kafka-broker1:9092&quot;);
+        props.put(StreamsConfig.APPLICATION_ID_CONFIG, &#34;wordcount-application&#34;);
+        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, &#34;kafka-broker1:9092&#34;);
         props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
  
         StreamsBuilder builder = new StreamsBuilder();
-        KStream&lt;String, String&gt; textLines = builder.stream(&quot;TextLinesTopic&quot;);
+        KStream&lt;String, String&gt; textLines = builder.stream(&#34;TextLinesTopic&#34;);
         KTable&lt;String, Long&gt; wordCounts = textLines
-            .flatMapValues(textLine -&gt; Arrays.asList(textLine.toLowerCase().split(&quot;\\W+&quot;)))
+            .flatMapValues(textLine -&gt; Arrays.asList(textLine.toLowerCase().split(&#34;\\W+&#34;)))
             .groupBy((key, word) -&gt; word)
-            .count(Materialized.&lt;String, Long, KeyValueStore&lt;Bytes, byte[]&gt;&gt;as(&quot;counts-store&quot;));
-        wordCounts.toStream().to(&quot;WordsWithCountsTopic&quot;, Produced.with(Serdes.String(), Serdes.Long()));
+            .count(Materialized.&lt;String, Long, KeyValueStore&lt;Bytes, byte[]&gt;&gt;as(&#34;counts-store&#34;));
+        wordCounts.toStream().to(&#34;WordsWithCountsTopic&#34;, Produced.with(Serdes.String(), Serdes.Long()));
  
         KafkaStreams streams = new KafkaStreams(builder.build(), props);
         streams.start();
@@ -275,7 +282,7 @@ public class WordCountApplication {
 
 
 }
-</code></pre><p><a href="https://kafka.apache.org/20/javadoc/index.html?org/apache/kafka/streams/KafkaStreams.html">Detail</a></p>
+</code></pre></div><p><a href="https://kafka.apache.org/20/javadoc/index.html?org/apache/kafka/streams/KafkaStreams.html">Detail</a></p>
 <h4 id="kafka-connect">Kafka Connect</h4>
 <p>Kafka Connect is a tool for scalably and reliably streaming data between Apache Kafka and other systems</p>
 <h5 id="features">Features</h5>
@@ -289,24 +296,24 @@ public class WordCountApplication {
 </ul>
 <h5 id="developing-a-simple-connector">Developing a simple connector</h5>
 <p>Developing a connector only requires implementing two interfaces, the Connector and Task. A simple example is included with the source code for Kafka in the file package. This connector is meant for use in standalone mode and has implementations of a SourceConnector/SourceTask to read each line of a file and emit it as a record and a SinkConnector/SinkTask that writes each record to a file.</p>
-<pre tabindex="0"><code>public class FileStreamSourceConnector extends SourceConnector {
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">public class FileStreamSourceConnector extends SourceConnector {
     private String filename;
     private String topic;
-</code></pre><pre tabindex="0"><code>@Override
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">@Override
 public Class&lt;? extends Task&gt; taskClass() {
     return FileStreamSourceTask.class;
 }
-</code></pre><pre tabindex="0"><code>@Override
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">@Override
 public void start(Map&lt;String, String&gt; props) {
     // The complete version includes error handling as well.
     filename = props.get(FILE_CONFIG);
     topic = props.get(TOPIC_CONFIG);
 }
-</code></pre><pre tabindex="0"><code>@Override
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">@Override
 public void stop() {
     // Nothing to do since no background monitoring is required.
 }
-</code></pre><pre tabindex="0"><code>@Override
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">@Override
 public List&lt;Map&lt;String, String&gt;&gt; taskConfigs(int maxTasks) {
     ArrayList&lt;Map&lt;String, String&gt;&gt; configs = new ArrayList&lt;&gt;();
     // Only one input stream makes sense.
@@ -317,7 +324,7 @@ public List&lt;Map&lt;String, String&gt;&gt; taskConfigs(int maxTasks) {
     configs.add(config);
     return configs;
 }
-</code></pre><pre tabindex="0"><code>public class FileStreamSourceTask extends SourceTask {
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">public class FileStreamSourceTask extends SourceTask {
     String filename;
     InputStream stream;
     String topic;
@@ -333,17 +340,17 @@ public List&lt;Map&lt;String, String&gt;&gt; taskConfigs(int maxTasks) {
     public synchronized void stop() {
         stream.close();
     }
-</code></pre><h4 id="working-with-schemas">Working with Schemas</h4>
-<pre tabindex="0"><code>Schema schema = SchemaBuilder.struct().name(NAME)
-    .field(&quot;name&quot;, Schema.STRING_SCHEMA)
-    .field(&quot;age&quot;, Schema.INT_SCHEMA)
-    .field(&quot;admin&quot;, new SchemaBuilder.boolean().defaultValue(false).build())
+</code></pre></div><h4 id="working-with-schemas">Working with Schemas</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Schema schema = SchemaBuilder.struct().name(NAME)
+    .field(&#34;name&#34;, Schema.STRING_SCHEMA)
+    .field(&#34;age&#34;, Schema.INT_SCHEMA)
+    .field(&#34;admin&#34;, new SchemaBuilder.boolean().defaultValue(false).build())
     .build();
  
 Struct struct = new Struct(schema)
-    .put(&quot;name&quot;, &quot;Barbara Liskov&quot;)
-    .put(&quot;age&quot;, 75);
-</code></pre><p>There is a lot of other details but the basic overview is there.</p>
+    .put(&#34;name&#34;, &#34;Barbara Liskov&#34;)
+    .put(&#34;age&#34;, 75);
+</code></pre></div><p>There is a lot of other details but the basic overview is there.</p>
 <h1 id="thats-all-folks">That&rsquo;s all folks.</h1>
 
 		</section>
@@ -368,11 +375,13 @@ Struct struct = new Struct(schema)
 	</article>
 </main>
 <footer>
-<hr>⚡️
+<hr><a class="soc" href="https://github.com/rava-dosa" title="GitHub"><i data-feather="github"></i></a>|<a class="soc" href="https://twitter.com/rava_dosa" title="Twitter"><i data-feather="twitter"></i></a>|⚡️
 	2022  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
 </footer>
 
 
-</div>
+<script>
+      feather.replace()
+</script></div>
     </body>
 </html>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html><head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>How to make writing in a file, safe ? - My New Hugo Site</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>How to make writing in a file, safe ? - Blog Test</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="General Architecture ![DB1](/img/Screenshot from 2018-08-27 18-09-19.png){:class=&ldquo;img-responsive&rdquo;}
 Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . This is an original content.
 Let&rsquo;s start Problem Statement -&gt; This is a distributed system. Multiple system is trying to read or write from a file, Now how to make it safe ? . Safe in the sense that how can sys 4 possibly know that sys 1 is writing in the file." />
-	<meta property="og:image" content=""/>
+	<meta property="og:image" content="img/calvin-hobbes.png"/>
 	<meta property="og:title" content="How to make writing in a file, safe ?" />
 <meta property="og:description" content="General Architecture ![DB1](/img/Screenshot from 2018-08-27 18-09-19.png){:class=&ldquo;img-responsive&rdquo;}
 Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . This is an original content.
@@ -20,7 +20,8 @@ Let&rsquo;s start Problem Statement -&gt; This is a distributed system. Multiple
 <meta name="twitter:description" content="General Architecture ![DB1](/img/Screenshot from 2018-08-27 18-09-19.png){:class=&ldquo;img-responsive&rdquo;}
 Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . This is an original content.
 Let&rsquo;s start Problem Statement -&gt; This is a distributed system. Multiple system is trying to read or write from a file, Now how to make it safe ? . Safe in the sense that how can sys 4 possibly know that sys 1 is writing in the file."/>
-
+<script src="http://rava-dosa.github.io/arm/js/feather.min.js"></script>
+	
 	
         <link href="http://rava-dosa.github.io/arm/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
 	
@@ -33,9 +34,15 @@ Let&rsquo;s start Problem Statement -&gt; This is a distributed system. Multiple
 <body>
         <div class="content"><header>
 	<div class="main">
-		<a href="http://rava-dosa.github.io/arm/">My New Hugo Site</a>
+		<a href="http://rava-dosa.github.io/arm/">Blog Test</a>
 	</div>
 	<nav>
+		
+		<a href="/arm/posts">All posts</a>
+		
+		<a href="/arm/til">TIL</a>
+		
+		<a href="/arm/tags">Tags</a>
 		
 		
 	</nav>
@@ -85,11 +92,13 @@ Let&rsquo;s start Problem Statement -&gt; This is a distributed system. Multiple
 	</article>
 </main>
 <footer>
-<hr>⚡️
+<hr><a class="soc" href="https://github.com/rava-dosa" title="GitHub"><i data-feather="github"></i></a>|<a class="soc" href="https://twitter.com/rava_dosa" title="Twitter"><i data-feather="twitter"></i></a>|⚡️
 	2022  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
 </footer>
 
 
-</div>
+<script>
+      feather.replace()
+</script></div>
     </body>
 </html>

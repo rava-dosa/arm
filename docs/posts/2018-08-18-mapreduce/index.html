@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html><head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Monologue on Map Reduce - My New Hugo Site</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Monologue on Map Reduce - Blog Test</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="General Architecture {:class=&ldquo;img-responsive&rdquo;}
 Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . I am copying content from various sources which I have read and experimented in the last week.
 Installation This [link] works totally fine. Except the download link Use this link to download hadoop instead [link] .Few pointers for misery I faced:" />
-	<meta property="og:image" content=""/>
+	<meta property="og:image" content="img/calvin-hobbes.png"/>
 	<meta property="og:title" content="Monologue on Map Reduce" />
 <meta property="og:description" content="General Architecture {:class=&ldquo;img-responsive&rdquo;}
 Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . I am copying content from various sources which I have read and experimented in the last week.
@@ -20,7 +20,8 @@ Installation This [link] works totally fine. Except the download link Use this l
 <meta name="twitter:description" content="General Architecture {:class=&ldquo;img-responsive&rdquo;}
 Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . I am copying content from various sources which I have read and experimented in the last week.
 Installation This [link] works totally fine. Except the download link Use this link to download hadoop instead [link] .Few pointers for misery I faced:"/>
-
+<script src="http://rava-dosa.github.io/arm/js/feather.min.js"></script>
+	
 	
         <link href="http://rava-dosa.github.io/arm/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
 	
@@ -33,9 +34,15 @@ Installation This [link] works totally fine. Except the download link Use this l
 <body>
         <div class="content"><header>
 	<div class="main">
-		<a href="http://rava-dosa.github.io/arm/">My New Hugo Site</a>
+		<a href="http://rava-dosa.github.io/arm/">Blog Test</a>
 	</div>
 	<nav>
+		
+		<a href="/arm/posts">All posts</a>
+		
+		<a href="/arm/til">TIL</a>
+		
+		<a href="/arm/tags">Tags</a>
 		
 		
 	</nav>
@@ -94,11 +101,11 @@ public void map(Object key, Text value, Context context
 </code></pre>
 <p>}</p>
 <p>{% endhighlight %}</p>
-<pre tabindex="0"><code>private final static IntWritable one = new IntWritable(1);
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">private final static IntWritable one = new IntWritable(1);
 private Text word = new Text();
-</code></pre><p>The variables one and word are the key/value pair respectively.</p>
-<pre tabindex="0"><code>StringTokenizer itr = new StringTokenizer(value.toString());
-</code></pre><p>It splits the line into tokens separated by whitespaces, via the StringTokenizer, and emits a key-value pair of &lt; <!-- raw HTML omitted -->, 1&gt;.</p>
+</code></pre></div><p>The variables one and word are the key/value pair respectively.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">StringTokenizer itr = new StringTokenizer(value.toString());
+</code></pre></div><p>It splits the line into tokens separated by whitespaces, via the StringTokenizer, and emits a key-value pair of &lt; <!-- raw HTML omitted -->, 1&gt;.</p>
 <p>{% highlight java linenos %}</p>
 <p>public void reduce(Text key, Iterable<!-- raw HTML omitted --> values,
 Context context
@@ -112,11 +119,11 @@ context.write(key, result);
 }</p>
 <p>{% endhighlight %}</p>
 <p>I found this loop amusing so I googled it and it means(enhanced for)</p>
-<pre tabindex="0"><code>for(int i = 0; i &lt; values.size(); i++) {
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">for(int i = 0; i &lt; values.size(); i++) {
     sum += val.get(i);
 }
-</code></pre><pre tabindex="0"><code> Configuration conf = new Configuration();
-    Job job = Job.getInstance(conf, &quot;word count&quot;);
+</code></pre></div><div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"> Configuration conf = new Configuration();
+    Job job = Job.getInstance(conf, &#34;word count&#34;);
     job.setJarByClass(WordCount.class);
     job.setMapperClass(TokenizerMapper.class);
     job.setCombinerClass(IntSumReducer.class);
@@ -125,7 +132,7 @@ context.write(key, result);
     job.setOutputValueClass(IntWritable.class);
     FileInputFormat.addInputPath(job, new Path(args[0]));
     FileOutputFormat.setOutputPath(job, new Path(args[1]));
-</code></pre><p>This is used to set different configuration of a job.<a href="https://hadoop.apache.org/docs/current3/api/org/apache/hadoop/mapreduce/Job.html">[ref]</a></p>
+</code></pre></div><p>This is used to set different configuration of a job.<a href="https://hadoop.apache.org/docs/current3/api/org/apache/hadoop/mapreduce/Job.html">[ref]</a></p>
 <h4 id="payload">Payload</h4>
 <p><img src="https://sharathambati.files.wordpress.com/2014/08/0f163-p4.png?w=640" alt="MapReduce1">{:class=&ldquo;img-responsive&rdquo;}
 <strong>Mapper</strong></p>
@@ -136,9 +143,9 @@ context.write(key, result);
 <li>Users can control which keys (and hence records) go to which Reducer by implementing a custom Partitioner.</li>
 <li>The intermediate, sorted outputs are always stored in a simple (key-len, key, value-len, value) format. Applications can control if, and how, the intermediate outputs are to be compressed and the CompressionCodec to be used via the Configuration.</li>
 </ul>
-<pre tabindex="0"><code>FileOutputFormat.setCompressOutput(job, true);
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">FileOutputFormat.setCompressOutput(job, true);
 FileOutputFormat.setOutputCompressorClass(job, org.apache.hadoop.io.compress.SnappyCodec.class);
-</code></pre><p><a href="https://stackoverflow.com/questions/30659547/mapreduce-job-not-setting-compression-codec-correctly">Ref</a></p>
+</code></pre></div><p><a href="https://stackoverflow.com/questions/30659547/mapreduce-job-not-setting-compression-codec-correctly">Ref</a></p>
 <ul>
 <li>For more information visit <a href="https://hadoop.apache.org/docs/current3/api/org/apache/hadoop/mapreduce/class-use/Mapper.html">ref</a></li>
 </ul>
@@ -258,11 +265,13 @@ If equivalence rules for grouping the intermediate keys are required to be diffe
 	</article>
 </main>
 <footer>
-<hr>⚡️
+<hr><a class="soc" href="https://github.com/rava-dosa" title="GitHub"><i data-feather="github"></i></a>|<a class="soc" href="https://twitter.com/rava_dosa" title="Twitter"><i data-feather="twitter"></i></a>|⚡️
 	2022  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
 </footer>
 
 
-</div>
+<script>
+      feather.replace()
+</script></div>
     </body>
 </html>

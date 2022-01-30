@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html><head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Dialogues on linux kernel-2 - My New Hugo Site</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Dialogues on linux kernel-2 - Blog Test</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Architecture of Linux kernel {:class=&ldquo;img-responsive&rdquo;}
 Before We start This series is neither totally theoritical nor totally hands-on. It is amalgammation of both. Just the way I think. You will not become expert which should be implied.
 What is Syscall ? System call is the programmatic way in which a computer program requests a service from the kernel of the operating system it is executed on. This may include hardware-related services (for example, accessing a hard disk drive), creation and execution of new processes, and communication with integral kernel services such as process scheduling." />
-	<meta property="og:image" content=""/>
+	<meta property="og:image" content="img/calvin-hobbes.png"/>
 	<meta property="og:title" content="Dialogues on linux kernel-2" />
 <meta property="og:description" content="Architecture of Linux kernel {:class=&ldquo;img-responsive&rdquo;}
 Before We start This series is neither totally theoritical nor totally hands-on. It is amalgammation of both. Just the way I think. You will not become expert which should be implied.
@@ -20,7 +20,8 @@ What is Syscall ? System call is the programmatic way in which a computer progra
 <meta name="twitter:description" content="Architecture of Linux kernel {:class=&ldquo;img-responsive&rdquo;}
 Before We start This series is neither totally theoritical nor totally hands-on. It is amalgammation of both. Just the way I think. You will not become expert which should be implied.
 What is Syscall ? System call is the programmatic way in which a computer program requests a service from the kernel of the operating system it is executed on. This may include hardware-related services (for example, accessing a hard disk drive), creation and execution of new processes, and communication with integral kernel services such as process scheduling."/>
-
+<script src="http://rava-dosa.github.io/arm/js/feather.min.js"></script>
+	
 	
         <link href="http://rava-dosa.github.io/arm/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
 	
@@ -33,9 +34,15 @@ What is Syscall ? System call is the programmatic way in which a computer progra
 <body>
         <div class="content"><header>
 	<div class="main">
-		<a href="http://rava-dosa.github.io/arm/">My New Hugo Site</a>
+		<a href="http://rava-dosa.github.io/arm/">Blog Test</a>
 	</div>
 	<nav>
+		
+		<a href="/arm/posts">All posts</a>
+		
+		<a href="/arm/til">TIL</a>
+		
+		<a href="/arm/tags">Tags</a>
 		
 		
 	</nav>
@@ -122,7 +129,7 @@ asmlinkage long sys_dup(unsigned int fildes);
 <p>No not so much, but the pain of compiling will definitely kill you(took me 3 hrs to compile a single syscall change in kernel).</p>
 <h3 id="writing-a-new-syscall">Writing a new syscall</h3>
 <p>First download kernel source code.</p>
-<pre tabindex="0"><code>wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.18.1.tar.xz
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.18.1.tar.xz
 sudo -s
 tar -xvf linux-4.18.1.tar.xz -C /usr/src/
 cd /usr/src/linux-4.18.1
@@ -130,7 +137,7 @@ mkdir helloworld
 cd helloworld
 nano helloworld.c
 
-</code></pre><p>In helloworld.c</p>
+</code></pre></div><p>In helloworld.c</p>
 <p>{% highlight c %}
 #include &lt;linux/kernel.h&gt;</p>
 <p>asmlinkage long sys_helloworld(void)
@@ -140,44 +147,44 @@ return 0;
 }
 {% endhighlight %}</p>
 <p>Now make a makefile</p>
-<pre tabindex="0"><code>nano makefile.c
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">nano makefile.c
 # add this
 obj-y := helloworld.o
-</code></pre><p>After saving this makefile</p>
-<pre tabindex="0"><code>cd ..
-</code></pre><p>Now open makefile and go to line no 947 and add</p>
-<pre tabindex="0"><code> helloworld/ 
-</code></pre><p>Now open file syscall.h by</p>
-<pre tabindex="0"><code>nano include/linux/syscalls.h
-</code></pre><p>Now go to line 908 and add these lines</p>
-<pre tabindex="0"><code>asmlinkage long sys_helloworld(void);
-</code></pre><p>open syscall_64.tbl</p>
-<pre tabindex="0"><code>nano /arch/x86/entry/syscalls/syscall_64.tbl
+</code></pre></div><p>After saving this makefile</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd ..
+</code></pre></div><p>Now open makefile and go to line no 947 and add</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"> helloworld/ 
+</code></pre></div><p>Now open file syscall.h by</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">nano include/linux/syscalls.h
+</code></pre></div><p>Now go to line 908 and add these lines</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">asmlinkage long sys_helloworld(void);
+</code></pre></div><p>open syscall_64.tbl</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">nano /arch/x86/entry/syscalls/syscall_64.tbl
 
-</code></pre><p>Now go to line 346 and you will feel like adding</p>
-<pre tabindex="0"><code>335	64	helloworld			__x64_sys_helloworld
-</code></pre><p>I added this line compiled and got error.</p>
-<pre tabindex="0"><code>335	64	helloworld			sys_helloworld
-</code></pre><p>By adding this line it compiled successfully. I might be wrong you can try that line as well if it works then I would really like to know but it didn&rsquo;t work last time. And I might be wrong.</p>
-<pre tabindex="0"><code>cp /boot/config-$(uname -r) .config
+</code></pre></div><p>Now go to line 346 and you will feel like adding</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">335	64	helloworld			__x64_sys_helloworld
+</code></pre></div><p>I added this line compiled and got error.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">335	64	helloworld			sys_helloworld
+</code></pre></div><p>By adding this line it compiled successfully. I might be wrong you can try that line as well if it works then I would really like to know but it didn&rsquo;t work last time. And I might be wrong.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cp /boot/config-$(uname -r) .config
 make menuconfig
 # exit immediately after a semi colorful menu opens.
 make
 make modules_install install
-</code></pre><p>Yup! you did it yourself. Restart your computer and Now you have added a syscall. Now if you want to check if syscall works or not then make some file name try.c</p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+</code></pre></div><p>Yup! you did it yourself. Restart your computer and Now you have added a syscall. Now if you want to check if syscall works or not then make some file name try.c</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">#include &lt;stdio.h&gt;
 #include &lt;linux/kernel.h&gt;
 #include &lt;sys/syscall.h&gt;
 #include &lt;unistd.h&gt;
 int main(){
 long int s = syscall(335);
-printf(&quot;Syscall returned %ld \n&quot;,s);
+printf(&#34;Syscall returned %ld \n&#34;,s);
 return 0;
 }
-</code></pre><p>Now compile this programm with gcc try.c and then run it by ./a.out. if it prints syscall returned 0, then your syscall worked else not.</p>
-<pre tabindex="0"><code>dmesg
+</code></pre></div><p>Now compile this programm with gcc try.c and then run it by ./a.out. if it prints syscall returned 0, then your syscall worked else not.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">dmesg
 # kernel log, you will see hellowold printed in last
-</code></pre><p>That&rsquo;s it folks.</p>
+</code></pre></div><p>That&rsquo;s it folks.</p>
 
 		</section>
 
@@ -205,11 +212,13 @@ return 0;
 	</article>
 </main>
 <footer>
-<hr>⚡️
+<hr><a class="soc" href="https://github.com/rava-dosa" title="GitHub"><i data-feather="github"></i></a>|<a class="soc" href="https://twitter.com/rava_dosa" title="Twitter"><i data-feather="twitter"></i></a>|⚡️
 	2022  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
 </footer>
 
 
-</div>
+<script>
+      feather.replace()
+</script></div>
     </body>
 </html>

@@ -9,7 +9,7 @@ pygmentscodefencesguesssyntax = true
 
 paginate=5 # articles per page
 # googleAnalytics = "UA-179536383-1"
-
+publishDir = 'docs'
 [params]
 	mode="light" # color-mode → light,dark or auto
 	useCDN=false # don't use CDNs for fonts and icons, instead serve them locally.
@@ -47,4 +47,3 @@ name = "Tags"
 url = "/tags"
 weight = 3
 
-publishDir = 'docs'
