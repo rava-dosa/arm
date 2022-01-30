@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Monologue on hadoop file system - My New Hugo Site</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Cluster of computers {:class=&ldquo;img-responsive&rdquo;}
+Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . And I am totally copying the content of this blog from Hadoop Documentation.
+I just googled this &quot; HDFS relaxes a few POSIX requirements to enable streaming access to file system data &quot; You will find tons of link, You can accuse them of plagiarism, Mine as well." />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="Monologue on hadoop file system" />
+<meta property="og:description" content="Cluster of computers {:class=&ldquo;img-responsive&rdquo;}
+Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . And I am totally copying the content of this blog from Hadoop Documentation.
+I just googled this &quot; HDFS relaxes a few POSIX requirements to enable streaming access to file system data &quot; You will find tons of link, You can accuse them of plagiarism, Mine as well." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://rava-dosa.github.io/arm/posts/2018-08-11-hdfs/" /><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Monologue on hadoop file system"/>
+<meta name="twitter:description" content="Cluster of computers {:class=&ldquo;img-responsive&rdquo;}
+Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . And I am totally copying the content of this blog from Hadoop Documentation.
+I just googled this &quot; HDFS relaxes a few POSIX requirements to enable streaming access to file system data &quot; You will find tons of link, You can accuse them of plagiarism, Mine as well."/>
+
+	
+        <link href="http://rava-dosa.github.io/arm/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://rava-dosa.github.io/arm/css/main.2f9b5946627215dc1ae7fa5f82bfc9cfcab000329136befeea5733f21e77d68f.css" />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://rava-dosa.github.io/arm/">My New Hugo Site</a>
+	</div>
+	<nav>
+		
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Monologue on hadoop file system</h1>
+			<div class="meta">Posted on Jan 1, 0001</div>
+		</div>
+		
+
+		<section class="body">
+			<h3 id="cluster-of-computers">Cluster of computers</h3>
+<p><img src="http://i.imgur.com/Eu4D5iI.jpg" alt="Beowulf-cluster">{:class=&ldquo;img-responsive&rdquo;}</p>
+<h3 id="before-we-start">Before We start</h3>
+<p>It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . And I am totally copying the content of this blog from Hadoop Documentation.</p>
+<h3 id="i-just-googled-this--hdfs-relaxes-a-few-posix-requirements-to-enable-streaming-access-to-file-system-data-">I just googled this &quot; HDFS relaxes a few POSIX requirements to enable streaming access to file system data &quot;</h3>
+<p>You will find tons of link, You can accuse them of plagiarism, Mine as well.</p>
+<h3 id="lets-start">Let&rsquo;s start</h3>
+<h4 id="what-is-hdfs-">What is HDFS ?</h4>
+<p>The Hadoop Distributed File System (HDFS) is a distributed file system. So what is a distributed file system. Your file data will be present on multiple system.</p>
+<h4 id="hdfs-is-builtok-but-what-is-the-use-case-">HDFS is built,ok, But what is the use case ?</h4>
+<ul>
+<li>Hardware Failure -&gt; HDFS is designed to built on cheap commodity hardware. So this means you cannot run it on Good Hardware. Nope, you will just incur more cost.</li>
+<li>Streaming Data Access -&gt; High data throughput rates. <a href="https://en.wikipedia.org/wiki/Throughput">What is throughput</a>. Maximum rate at which data can be processed.</li>
+<li>Large Data Sets -&gt; Tuned to support large files.</li>
+<li>Simple Coherencey model -&gt; Write once read many . <a href="http://www.numa.uni-linz.ac.at/Staff/haase/parvor_e/node29.html">But what is coherency</a>.All copies of on data set include always the same data values.</li>
+<li>Moving Computation is Cheaper than Moving Data -&gt; Do calcultion on machine near where is data is stored.</li>
+<li>Portability Across Heterogeneous Hardware and Software Platforms -&gt; Self descriptive.</li>
+</ul>
+<h4 id="namenode-and-datanodes">NameNode and Datanodes.</h4>
+<p><img src="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/images/hdfsarchitecture.png" alt="NameNode">{:class=&ldquo;img-responsive&rdquo;}</p>
+<h4 id="what-is-a-namenode-">What is a Namenode ?</h4>
+<p>NameNode -&gt; NameNode is a master server that manages the file system namespace and regulates access to files by clients. It feels similar to loadbalancer. HDFS exposes a file system namespace and allows user data to be stored in files. Internally, a file is split into one or more blocks and these blocks are stored in a set of DataNodes. The NameNode executes file system namespace operations like opening, closing, and renaming files and directories. It also determines the mapping of blocks to DataNodes. Data never flows through NameNode.</p>
+<h4 id="data-replication">Data replication</h4>
+<p><img src="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/images/hdfsdatanodes.png" alt="NameNode">{:class=&ldquo;img-responsive&rdquo;}
+HDFS stores each file as a sequence of block. There are replicated as well, All blocks except the last one are of same size. An application can support number of number of replicas of a file. An application can specify the number of replicas of a file. The replication factor can be specified at file creation time and can be changed later. Files in HDFS are write-once (except for appends and truncates) and have strictly one writer at any time.</p>
+<h4 id="replica-placement">Replica Placement.</h4>
+<p>Rack-aware replica placement policy is to improve data reliability, availability, and network bandwidth utilization. The NameNode determines the rack id each DataNode belongs to via the process outlined in Hadoop Rack Awareness. A simple but non-optimal policy is to place replicas on unique racks. This prevents losing data when an entire rack fails and allows use of bandwidth from multiple racks when reading data. This policy evenly distributes replicas in the cluster which makes it easy to balance load on component failure. However, this policy increases the cost of writes because a write needs to transfer blocks to multiple racks.If the replication factor is greater than 3, the placement of the 4th and following replicas are determined randomly while keeping the number of replicas per rack below the upper limit (which is basically (replicas - 1) / racks + 2).</p>
+<h4 id="replica-selection">Replica Selection</h4>
+<p>Datanodes can be distributed across multiple regions. So replica selection for user is done which datanode is nearest to him.</p>
+<h3 id="communication-protocol">Communication protocol</h3>
+<p>Just like HTTP all the communication b/w nodes is based on TCP/IP. A client connects with NameNode machine. It talks the ClientProtocol with the NameNode. The DataNodes talk to the NameNode using the DataNode Protocol. The DataNodes talk to the NameNode using the DataNode Protocol. A Remote Procedure Call <a href="https://en.wikipedia.org/wiki/Remote_procedure_call">RPC</a> abstraction wraps both the Client Protocol and the DataNode Protocol. By design, the NameNode never initiates any RPCs. It only responds to RPC requests by DataNodes or clients.</p>
+<h4 id="data-disk-failure-heartbeats-and-re-replication">Data Disk Failure, Heartbeats and Re-Replication</h4>
+<ul>
+<li>DataNode sends a Heartbeat message to the NameNode</li>
+<li>NameNode detects this condition by the absence of a Heartbeat message</li>
+<li>NameNode marks DataNodes without recent Heartbeats as dead</li>
+<li>DataNode death may cause the replication factor of some blocks to fall, The NameNode constantly tracks which blocks need to be replicated and initiates replication whenever necessary.</li>
+<li>The time-out to mark DataNodes dead is conservatively long (over 10 minutes by default) in order to avoid replication storm caused by state flapping of DataNodes</li>
+</ul>
+<h4 id="cluster-rebalancing">Cluster Rebalancing</h4>
+<ul>
+<li>There is a data rebalancing scheme</li>
+<li>It can move data from one DataNode to another if the free space on a DataNode falls below a certain threshold</li>
+<li>In the event of a sudden high demand for a particular file, a scheme might dynamically create additional replicas and rebalance other data in the cluster
+<em>Not yet implemented(Seriously). Might be good intern work. LOL</em></li>
+</ul>
+<h4 id="data-integrity">Data integrity</h4>
+<ul>
+<li>HDFS client software implements checksum checking on the contents of HDFS files</li>
+<li>A client creates an HDFS file, it computes a checksum of each block of the file and stores these checksums in a separate hidden file in the same HDFS namespace.</li>
+</ul>
+<h4 id="metadata-disk-failure">Metadata Disk Failure</h4>
+<ul>
+<li>FsImage and the EditLog are central data structures of HDFS</li>
+<li>So NameNode can be configured to support maintaining multiple copies of the FsImage and EditLog</li>
+<li>Synchronous updating of multiple copies of the FsImage and EditLog may degrade the rate of namespace transactions per second that a NameNode can support.</li>
+<li>When a NameNode restarts, it selects the latest consistent FsImage and EditLog to use</li>
+<li>Another option to increase resilience against failures is to enable High Availability using multiple NameNodes either with a shared storage on NFS or using a distributed edit log</li>
+</ul>
+<h4 id="snapshots">Snapshots</h4>
+<ul>
+<li>Similar to git commit</li>
+</ul>
+<h3 id="what-happens-when-you-decrease-replication-factor-">What happens when you decrease replication factor ?</h3>
+<p>When the replication factor of a file is reduced, the NameNode selects excess replicas that can be deleted. The next Heartbeat transfers this information to the DataNode.</p>
+<h3 id="features-in-hdfs">Features in HDFS</h3>
+<ul>
+<li>File permissions and authentication.</li>
+<li>Rack awareness: to take a node’s physical location into account while scheduling tasks and allocating storage.</li>
+<li>Safemode: an administrative mode for maintenance.</li>
+<li>fsck: a utility to diagnose health of the file system, to find missing files or blocks.</li>
+<li>fetchdt: a utility to fetch DelegationToken and store it in a file on the local system.</li>
+<li>Balancer: tool to balance the cluster when the data is unevenly distributed among DataNodes.</li>
+<li>Upgrade and rollback: after a software upgrade, it is possible to rollback to HDFS’ state before the upgrade in case of unexpected problems.</li>
+<li>Secondary NameNode: performs periodic checkpoints of the namespace and helps keep the size of file containing log of HDFS modifications within certain limits at the NameNode.</li>
+<li>Checkpoint node: performs periodic checkpoints of the namespace and helps minimize the size of the log stored at the NameNode containing changes to the HDFS. Replaces the role previously filled by the Secondary NameNode, though is not yet battle hardened. The NameNode allows multiple Checkpoint nodes simultaneously, as long as there are no Backup nodes registered with the system.</li>
+<li>Backup node: An extension to the Checkpoint node. In addition to checkpointing it also receives a stream of edits from the NameNode and maintains its own in-memory copy of the namespace, which is always in sync with the active NameNode namespace state. Only one Backup node may be registered with the NameNode at once.</li>
+<li><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsUserGuide.html">Checkpoint and Backup Node in detail</a></li>
+</ul>
+<h3 id="commands-in-hdfs">Commands in HDFS</h3>
+<p>All commands start with hdfs:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Commands</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">fs –help ls</td>
+<td style="text-align:left">lists the usage information along with the options to use the command</td>
+</tr>
+<tr>
+<td style="text-align:left">fs –ls –R /user/username</td>
+<td style="text-align:left">Returns all the available files and recursively lists all the subdirectories under /user/username</td>
+</tr>
+<tr>
+<td style="text-align:left">fs –mkdir /user/username/directory-name</td>
+<td style="text-align:left">create a new directory</td>
+</tr>
+<tr>
+<td style="text-align:left">fs –copyFromLocal Sample1.txt /user/username/destination-address</td>
+<td style="text-align:left">copy from local filesystem to hdfs</td>
+</tr>
+<tr>
+<td style="text-align:left">fs –put Sample2.txt /user/username/destination-address</td>
+<td style="text-align:left">uploads a single file or multiple source files from local file system to hadoop distributed file system</td>
+</tr>
+<tr>
+<td style="text-align:left">fs –moveFromLocal Sample1.txt /user/username/destination-address</td>
+<td style="text-align:left">deletes original and copy</td>
+</tr>
+<tr>
+<td style="text-align:left">fs –du /user/username/destination-address</td>
+<td style="text-align:left">HDFS disk usage command</td>
+</tr>
+<tr>
+<td style="text-align:left">fs –df</td>
+<td style="text-align:left">Display disk usage of current hadoop distributed file system</td>
+</tr>
+<tr>
+<td style="text-align:left">fs –expunge</td>
+<td style="text-align:left">empties the trash by deleting all the files and directories</td>
+</tr>
+</tbody>
+</table>
+<h6 id="there-a-lot-of-other-command-similar-to-unix-file-system-with-hadoop-fs-prefixed">There a lot of other command similar to unix file system with hadoop fs prefixed.</h6>
+<p>Command prefix &ldquo;hdfs &ldquo;:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Commands</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">classpath &ndash;glob</td>
+<td style="text-align:left">expands wildcard <em>I don&rsquo;t know what that is</em></td>
+</tr>
+<tr>
+<td style="text-align:left">classpath &ndash;jar</td>
+<td style="text-align:left">write classpath as manifest in jar named path</td>
+</tr>
+<tr>
+<td style="text-align:left">classpath -h</td>
+<td style="text-align:left">print help</td>
+</tr>
+</tbody>
+</table>
+<h6 id="it-checks-file-system-integrity">It checks file system integrity</h6>
+<p>Command prefix &ldquo;hdfs fcsk &ldquo;:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Commands</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-delete</td>
+<td style="text-align:left">Delete corrupted files.</td>
+</tr>
+<tr>
+<td style="text-align:left">-files</td>
+<td style="text-align:left">Print out files being checked.</td>
+</tr>
+<tr>
+<td style="text-align:left">-files -blocks</td>
+<td style="text-align:left">Print out the block report</td>
+</tr>
+<tr>
+<td style="text-align:left">-files -blocks -locations</td>
+<td style="text-align:left">Print out locations for every block.</td>
+</tr>
+<tr>
+<td style="text-align:left">-files -blocks -racks</td>
+<td style="text-align:left">Print out network topology for data-node locations.</td>
+</tr>
+<tr>
+<td style="text-align:left">-files -blocks -replicaDetails</td>
+<td style="text-align:left">Print out each replica details.</td>
+</tr>
+<tr>
+<td style="text-align:left">-files -blocks -upgradedomains</td>
+<td style="text-align:left">Print out upgrade domains for every block.</td>
+</tr>
+<tr>
+<td style="text-align:left">-includeSnapshots</td>
+<td style="text-align:left">Include snapshot data if the given path indicates a snapshottable directory or there are snapshottable directories under it.</td>
+</tr>
+<tr>
+<td style="text-align:left">-list-corruptfileblocks</td>
+<td style="text-align:left">Print out list of missing blocks and files they belong to.</td>
+</tr>
+<tr>
+<td style="text-align:left">-move</td>
+<td style="text-align:left">Move corrupted files to /lost+found.</td>
+</tr>
+<tr>
+<td style="text-align:left">-openforwrite</td>
+<td style="text-align:left">Print out files opened for write.</td>
+</tr>
+<tr>
+<td style="text-align:left">-storagepolicies</td>
+<td style="text-align:left">Print out storage policy summary for the blocks.</td>
+</tr>
+<tr>
+<td style="text-align:left">-maintenance</td>
+<td style="text-align:left">Print out maintenance state node details.</td>
+</tr>
+<tr>
+<td style="text-align:left">-blockId</td>
+<td style="text-align:left">Print out information about the block.</td>
+</tr>
+</tbody>
+</table>
+<p>prefix hdfs getconf:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Commands</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-namenodes</td>
+<td style="text-align:left">gets list of namenodes in the cluster.</td>
+</tr>
+<tr>
+<td style="text-align:left">-secondaryNameNodes</td>
+<td style="text-align:left">gets list of secondary namenodes in the cluster.</td>
+</tr>
+<tr>
+<td style="text-align:left">-backupNodes</td>
+<td style="text-align:left">gets list of backup nodes in the cluster.</td>
+</tr>
+<tr>
+<td style="text-align:left">-includeFile</td>
+<td style="text-align:left">gets the include file path that defines the datanodes that can join the cluster.</td>
+</tr>
+<tr>
+<td style="text-align:left">-excludeFile</td>
+<td style="text-align:left">gets the exclude file path that defines the datanodes that need to decommissioned.</td>
+</tr>
+<tr>
+<td style="text-align:left">-nnRpcAddresses</td>
+<td style="text-align:left">gets the namenode rpc addresses</td>
+</tr>
+<tr>
+<td style="text-align:left">-confKey key</td>
+<td style="text-align:left">gets a specific key from the configuration</td>
+</tr>
+</tbody>
+</table>
+<p>prefix hdfs groups:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Commands</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">username</td>
+<td style="text-align:left">Returns the group information given one or more usernames.</td>
+</tr>
+</tbody>
+</table>
+<p>prefix hdfs balancer:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Commands</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-policy policy</td>
+<td style="text-align:left">datanode (default): Cluster is balanced if each datanode is balanced.blockpool: Cluster is balanced if each block pool in each datanode is balanced.</td>
+</tr>
+<tr>
+<td style="text-align:left">-threshold threshold</td>
+<td style="text-align:left">Percentage of disk capacity. This overwrites the default threshold.</td>
+</tr>
+<tr>
+<td style="text-align:left">-exclude -f hosts-file comma-separated list of hosts</td>
+<td style="text-align:left">Excludes the specified datanodes from being balanced by the balancer.</td>
+</tr>
+<tr>
+<td style="text-align:left">-include -f <!-- raw HTML omitted --> comma-separated list of hosts</td>
+<td style="text-align:left">Includes only the specified datanodes to be balanced by the balancer.</td>
+</tr>
+<tr>
+<td style="text-align:left">-source -f <!-- raw HTML omitted --> comma-separated list of hosts</td>
+<td style="text-align:left">Pick only the specified datanodes as source nodes.</td>
+</tr>
+<tr>
+<td style="text-align:left">-blockpools comma-separated list of blockpool ids</td>
+<td style="text-align:left">The balancer will only run on blockpools included in this list.</td>
+</tr>
+<tr>
+<td style="text-align:left">-idleiterations <!-- raw HTML omitted --></td>
+<td style="text-align:left">Maximum number of idle iterations before exit. This overwrites the default idleiterations(5).</td>
+</tr>
+<tr>
+<td style="text-align:left">-runDuringUpgrade</td>
+<td style="text-align:left">Whether to run the balancer during an ongoing HDFS upgrade. This is usually not desired since it will not affect used space on over-utilized machines.</td>
+</tr>
+<tr>
+<td style="text-align:left">-h</td>
+<td style="text-align:left">Display the tool usage and help information and exit.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="generic-options">Generic options</h3>
+<p>Prefix hdfs :</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Commands</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-archives comma separated list of archives</td>
+<td style="text-align:left">Specify comma separated archives to be unarchived on the compute machines. Applies only to job.</td>
+</tr>
+<tr>
+<td style="text-align:left">-conf configuration file</td>
+<td style="text-align:left">Specify an application configuration file.</td>
+</tr>
+<tr>
+<td style="text-align:left">-D property=value</td>
+<td style="text-align:left">Use value for given property.</td>
+</tr>
+<tr>
+<td style="text-align:left">-files comma separated list of files</td>
+<td style="text-align:left">Specify comma separated files to be copied to the map reduce cluster. Applies only to job.</td>
+</tr>
+<tr>
+<td style="text-align:left">-fs file:/// or hdfs://namenode:port</td>
+<td style="text-align:left">Specify default filesystem URL to use. Overrides ‘fs.defaultFS’ property from configurations.</td>
+</tr>
+<tr>
+<td style="text-align:left">-jt local or resourcemanager:port</td>
+<td style="text-align:left">Specify a ResourceManager. Applies only to job.</td>
+</tr>
+<tr>
+<td style="text-align:left">-libjars comma seperated list of jars</td>
+<td style="text-align:left">Specify comma separated jar files to include in the classpath. Applies only to job.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="see-morehttphadoopapacheorgdocscurrenthadoop-project-disthadoop-commoncommandsmanualhtmlgeneric_options"><a href="http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/CommandsManual.html#Generic_Options">See more</a></h5>
+<h4 id="cacheadmin">Cacheadmin</h4>
+<ul>
+<li>hdfs cacheadmin [-addDirective -path <!-- raw HTML omitted --> -pool <!-- raw HTML omitted --> [-force] [-replication <!-- raw HTML omitted -->] [-ttl <!-- raw HTML omitted -->]]</li>
+<li>hdfs cacheadmin [-modifyDirective -id <!-- raw HTML omitted --> [-path <!-- raw HTML omitted -->] [-force] [-replication <!-- raw HTML omitted -->] [-pool <!-- raw HTML omitted -->] [-ttl <!-- raw HTML omitted -->]]</li>
+<li>hdfs cacheadmin [-listDirectives [-stats] [-path <!-- raw HTML omitted -->] [-pool <!-- raw HTML omitted -->] [-id <!-- raw HTML omitted -->]]</li>
+<li>hdfs cacheadmin [-removeDirective <!-- raw HTML omitted -->]</li>
+<li>hdfs cacheadmin [-removeDirectives -path <!-- raw HTML omitted -->]</li>
+<li>hdfs cacheadmin [-addPool <!-- raw HTML omitted --> [-owner <!-- raw HTML omitted -->] [-group <!-- raw HTML omitted -->] [-mode <!-- raw HTML omitted -->] [-limit <!-- raw HTML omitted -->] [-maxTtl <!-- raw HTML omitted -->]]</li>
+<li>hdfs cacheadmin [-modifyPool <!-- raw HTML omitted --> [-owner <!-- raw HTML omitted -->] [-group <!-- raw HTML omitted -->] [-mode <!-- raw HTML omitted -->] [-limit <!-- raw HTML omitted -->] [-maxTtl <!-- raw HTML omitted -->]]</li>
+<li>hdfs cacheadmin [-removePool <!-- raw HTML omitted -->]</li>
+<li>hdfs cacheadmin [-listPools [-stats] [<!-- raw HTML omitted -->]]</li>
+<li>hdfs cacheadmin [-help <!-- raw HTML omitted -->]</li>
+</ul>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a href="/arm/tags/big-data">big-data</a></li>
+					
+					<li><a href="/arm/tags/software">software</a></li>
+					
+					<li><a href="/arm/tags/distributed-system">distributed-system</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
+<hr>⚡️
+	2022  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+</footer>
+
+
+</div>
+    </body>
+</html>

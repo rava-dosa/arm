@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Monologue on Map Reduce - My New Hugo Site</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="General Architecture {:class=&ldquo;img-responsive&rdquo;}
+Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . I am copying content from various sources which I have read and experimented in the last week.
+Installation This [link] works totally fine. Except the download link Use this link to download hadoop instead [link] .Few pointers for misery I faced:" />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="Monologue on Map Reduce" />
+<meta property="og:description" content="General Architecture {:class=&ldquo;img-responsive&rdquo;}
+Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . I am copying content from various sources which I have read and experimented in the last week.
+Installation This [link] works totally fine. Except the download link Use this link to download hadoop instead [link] .Few pointers for misery I faced:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://rava-dosa.github.io/arm/posts/2018-08-18-yarn/" /><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Monologue on Map Reduce"/>
+<meta name="twitter:description" content="General Architecture {:class=&ldquo;img-responsive&rdquo;}
+Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . I am copying content from various sources which I have read and experimented in the last week.
+Installation This [link] works totally fine. Except the download link Use this link to download hadoop instead [link] .Few pointers for misery I faced:"/>
+
+	
+        <link href="http://rava-dosa.github.io/arm/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://rava-dosa.github.io/arm/css/main.2f9b5946627215dc1ae7fa5f82bfc9cfcab000329136befeea5733f21e77d68f.css" />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://rava-dosa.github.io/arm/">My New Hugo Site</a>
+	</div>
+	<nav>
+		
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Monologue on Map Reduce</h1>
+			<div class="meta">Posted on Jan 1, 0001</div>
+		</div>
+		
+
+		<section class="body">
+			<h3 id="general-architecture">General Architecture</h3>
+<p><img src="https://www.networkershome.com/wp-content/uploads/2017/10/nh-big-data-hadoop.jpg" alt="MapReduce">{:class=&ldquo;img-responsive&rdquo;}</p>
+<h3 id="before-we-start">Before We start</h3>
+<p>It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . I am copying content from various sources which I have read and experimented in the last week.</p>
+<h3 id="installation">Installation</h3>
+<p>This <a href="http://exabig.com/blog/2018/03/20/setup-hadoop-3-1-0-single-node-cluster-on-ubuntu-16-04/">[link]</a> works totally fine. Except the download link  Use this link to download hadoop instead <a href="http://www-us.apache.org/dist/hadoop/common/hadoop-3.1.1/hadoop-3.1.1.tar.gz">[link]</a> .Few pointers for misery I faced:</p>
+<ul>
+<li>OpenJdk doesn&rsquo;t work properly with hadoop. After a day&rsquo;s effort I realized that my node and resource manager is not working due to OpenJdk. I changed it to oracle 8 and then it works properly. I even disabled firewall even then it didn&rsquo;t work.</li>
+<li>Make a new user or it will give some root error.</li>
+<li>Take care of version in hadoop what solution and configuration is provided for 2.0 may not work for versions &gt; 3.</li>
+</ul>
+<h3 id="mapreduce">MapReduce</h3>
+<h4 id="all-moving-parts">All moving parts</h4>
+<ul>
+<li>A MapReduce job usually splits the input data-set into independent chunks</li>
+<li>The MapReduce framework consists of a single master ResourceManager</li>
+<li>One worker NodeManager per cluster-node.</li>
+</ul>
+<h4 id="what-is-comprised-in-job-configuration-">What is comprised in job configuration ?</h4>
+<ul>
+<li>the input/output locations</li>
+<li>supply map and reduce functions</li>
+</ul>
+<p>The Hadoop job client then submits the job (jar/executable etc.) and configuration to the ResourceManager which then distributes software to the workers, scheduling tasks and monitoring them, providing status and diagnostic information to the job-client.</p>
+<h4 id="understanding-word-count-from-different-perspectives">Understanding Word count from different perspectives.</h4>
+<p><img src="http://stephanie-w.github.io/brainscribble/figure/wordcount.png" alt="MapReduce1">{:class=&ldquo;img-responsive&rdquo;}
+<strong>Code Walkthrough</strong></p>
+<p>{% highlight java linenos %}</p>
+<p>public static class TokenizerMapper
+extends Mapper&lt;Object, Text, Text, IntWritable&gt;{</p>
+<pre><code>private final static IntWritable one = new IntWritable(1);
+private Text word = new Text();
+
+public void map(Object key, Text value, Context context
+                ) throws IOException, InterruptedException {
+  StringTokenizer itr = new StringTokenizer(value.toString());
+  while (itr.hasMoreTokens()) {
+    word.set(itr.nextToken());
+    context.write(word, one);
+  }
+}
+</code></pre>
+<p>}</p>
+<p>{% endhighlight %}</p>
+<pre tabindex="0"><code>private final static IntWritable one = new IntWritable(1);
+private Text word = new Text();
+</code></pre><p>The variables one and word are the key/value pair respectively.</p>
+<pre tabindex="0"><code>StringTokenizer itr = new StringTokenizer(value.toString());
+</code></pre><p>It splits the line into tokens separated by whitespaces, via the StringTokenizer, and emits a key-value pair of &lt; <!-- raw HTML omitted -->, 1&gt;.</p>
+<p>{% highlight java linenos %}</p>
+<p>public void reduce(Text key, Iterable<!-- raw HTML omitted --> values,
+Context context
+) throws IOException, InterruptedException {
+int sum = 0;
+for (IntWritable val : values) {
+sum += val.get();
+}
+result.set(sum);
+context.write(key, result);
+}</p>
+<p>{% endhighlight %}</p>
+<p>I found this loop amusing so I googled it and it means(enhanced for)</p>
+<pre tabindex="0"><code>for(int i = 0; i &lt; values.size(); i++) {
+    sum += val.get(i);
+}
+</code></pre><pre tabindex="0"><code> Configuration conf = new Configuration();
+    Job job = Job.getInstance(conf, &quot;word count&quot;);
+    job.setJarByClass(WordCount.class);
+    job.setMapperClass(TokenizerMapper.class);
+    job.setCombinerClass(IntSumReducer.class);
+    job.setReducerClass(IntSumReducer.class);
+    job.setOutputKeyClass(Text.class);
+    job.setOutputValueClass(IntWritable.class);
+    FileInputFormat.addInputPath(job, new Path(args[0]));
+    FileOutputFormat.setOutputPath(job, new Path(args[1]));
+</code></pre><p>This is used to set different configuration of a job.<a href="https://hadoop.apache.org/docs/current3/api/org/apache/hadoop/mapreduce/Job.html">[ref]</a></p>
+<h4 id="payload">Payload</h4>
+<p><img src="https://sharathambati.files.wordpress.com/2014/08/0f163-p4.png?w=640" alt="MapReduce1">{:class=&ldquo;img-responsive&rdquo;}
+<strong>Mapper</strong></p>
+<ul>
+<li>Maps are the individual tasks that transform input records into intermediate records.</li>
+<li>Spawns one map task for each InputSplit generated by the InputFormat for the job.</li>
+<li>Users can control the grouping by specifying a Comparator via Job.setGroupingComparatorClass(Class).</li>
+<li>Users can control which keys (and hence records) go to which Reducer by implementing a custom Partitioner.</li>
+<li>The intermediate, sorted outputs are always stored in a simple (key-len, key, value-len, value) format. Applications can control if, and how, the intermediate outputs are to be compressed and the CompressionCodec to be used via the Configuration.</li>
+</ul>
+<pre tabindex="0"><code>FileOutputFormat.setCompressOutput(job, true);
+FileOutputFormat.setOutputCompressorClass(job, org.apache.hadoop.io.compress.SnappyCodec.class);
+</code></pre><p><a href="https://stackoverflow.com/questions/30659547/mapreduce-job-not-setting-compression-codec-correctly">Ref</a></p>
+<ul>
+<li>For more information visit <a href="https://hadoop.apache.org/docs/current3/api/org/apache/hadoop/mapreduce/class-use/Mapper.html">ref</a></li>
+</ul>
+<p><strong>No of Maps</strong><br>
+job.set(MRJobConfig.NUM_MAPS, int) according to the previous code.<br>
+<strong>Reducer</strong><br>
+The number of reduces for the job is set by the user via Job.setNumReduceTasks(int). Reducer has 3 primary phases: shuffle, sort and reduce.The output of the reduce task is typically written to the FileSystem via Context.write(WritableComparable, Writable).<br>
+<strong>Secondary Sort</strong><br>
+If equivalence rules for grouping the intermediate keys are required to be different from those for grouping keys before reduction, then one may specify a Comparator via Job.setSortComparatorClass(Class). Since Job.setGroupingComparatorClass(Class) can be used to control how intermediate keys are grouped, these can be used in conjunction to simulate secondary sort on values.</p>
+<h4 id="task-execution--environment">Task Execution &amp; Environment</h4>
+<p>The MRAppMaster executes the Mapper/Reducer task as a child process in a separate jvm.The child-task inherits the environment of the parent MRAppMaster.<a href="https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-app/apidocs/org/apache/hadoop/mapreduce/v2/app/MRAppMaster.html">Ref</a></p>
+<h4 id="memory-management">Memory management</h4>
+<ul>
+<li>Can specify the maximum virtual memory of the launched child-task, and any sub-process it launches recursively.</li>
+<li><a href="https://dzone.com/articles/configuring-memory-for-mapreduce-running-on-yarn">Basic Ref</a></li>
+</ul>
+<h4 id="map-and-reduce-parameters">Map and Reduce parameters</h4>
+<p>Map parameters</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">mapreduce.task.io.sort.mb</td>
+<td style="text-align:left">int</td>
+<td style="text-align:left">The cumulative size of the serialization and accounting buffers storing records emitted from the map, in megabytes.</td>
+</tr>
+<tr>
+<td style="text-align:left">mapreduce.map.sort.spill.percent</td>
+<td style="text-align:left">float</td>
+<td style="text-align:left">The soft limit in the serialization buffer. Once reached, a thread will begin to spill the contents to disk in the background.</td>
+</tr>
+</tbody>
+</table>
+<p>Similarly there are reduce parameters.<a href="https://hadoop.apache.org/docs/current3/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html#Shuffle.2FReduce_Parameters">Ref</a></p>
+<h4 id="logs">Logs</h4>
+<p>The standard output (stdout) and error (stderr) streams and the syslog of the task are read by the NodeManager and logged to ${HADOOP_LOG_DIR}/userlogs.</p>
+<h4 id="job-control">Job control</h4>
+<p><strong>This is an important concept</strong>. Users may need to chain MapReduce jobs to accomplish complex tasks which cannot be done via a single MapReduce job. This is fairly easy since the output of the job typically goes to distributed file-system, and the output, in turn, can be used as the input for the next job.</p>
+<ul>
+<li>Job.submit() : Submit the job to the cluster and return immediately.</li>
+<li>Job.waitForCompletion(boolean) : Submit the job to the cluster and wait for it to finish.<br>
+<a href="https://www.programcreek.com/java-api-examples/index.php?api=org.apache.hadoop.mapreduce.lib.jobcontrol.ControlledJob">Ref</a></li>
+</ul>
+<h4 id="job-input">Job input</h4>
+<p>InputFormat describes the input-specification for a MapReduce job.The MapReduce framework relies on the InputFormat of the job to:</p>
+<ul>
+<li>Validate the input-specification of the job.</li>
+<li>Split-up the input file(s) into logical InputSplit instances, each of which is then assigned to an individual Mapper.</li>
+<li>Provide the RecordReader implementation used to glean input records from the logical InputSplit for processing by the Mapper.<br>
+<strong>InputSplit</strong></li>
+<li>InputSplit represents the data to be processed by an individual Mapper.</li>
+<li>FileSplit is the default InputSplit. It sets mapreduce.map.input.file to the path of the input file for the logical split.<br>
+<strong>RecordReader</strong></li>
+<li>RecordReader reads &lt;key, value&gt; pairs from an InputSplit.<br>
+<strong>This Job input topic is not very clear to me yet.</strong></li>
+</ul>
+<h4 id="task-side-effect-files">Task Side-Effect Files.</h4>
+<p>In some applications, component tasks need to create and/or write to side-files, which differ from the actual job-output files. So this manages how the file will be saved and all that.</p>
+<h4 id="submitting-jobs-to-queues">Submitting jobs to queues.</h4>
+<ul>
+<li>
+<p>Queues, as collection of jobs, allow the system to provide specific functionality.Hadoop comes configured with a single mandatory queue, called ‘default’. Queue names are defined in the mapreduce.job.queuename property of the Hadoop site configuration. Some job schedulers, such as the Capacity Scheduler, support multiple queues.</p>
+</li>
+<li>
+<p>A job defines the queue it needs to be submitted to through the mapreduce.job.queuename property, or through the Configuration.set(MRJobConfig.QUEUE_NAME, String) API. Setting the queue name is optional. If a job is submitted without an associated queue name, it is submitted to the ‘default’ queue.</p>
+</li>
+</ul>
+<h4 id="distributed-cache">Distributed Cache</h4>
+<ul>
+<li>DistributedCache distributes application-specific, large, read-only files efficiently.</li>
+<li>Applications specify the files to be cached via urls (hdfs://) in the Job. The DistributedCache assumes that the files specified via hdfs:// urls are already present on the FileSystem.</li>
+<li>The files/archives can be distributed by setting the property mapreduce.job.cache.{files or archives}. If more than one file/archive has to be distributed, they can be added as comma separated paths. The properties can also be set by APIs Job.addCacheFile(URI)/ Job.addCacheArchive(URI) and Job.setCacheFiles(URI[])/ Job.setCacheArchives(URI[]) where URI is of the form hdfs://host:port/absolute-path#link-name.</li>
+<li>In Streaming, the files can be distributed through command line option -cacheFile/-cacheArchive.</li>
+</ul>
+<h4 id="profiling">Profiling</h4>
+<ul>
+<li>User can specify whether the system should collect profiler information for some of the tasks in the job by setting the configuration property mapreduce.task.profile.</li>
+<li>The value can be set using the api Configuration.set(MRJobConfig.TASK_PROFILE, boolean). If the value is set true, the task profiling is enabled.</li>
+</ul>
+<h4 id="debugging">Debugging</h4>
+<p>The MapReduce framework provides a facility to run user-provided scripts for debugging.</p>
+<ul>
+<li>The user needs to use DistributedCache to distribute and symlink to the script file.</li>
+<li>Set values for the properties mapreduce.map.debug.script and mapreduce.reduce.debug.script, for debugging map and reduce tasks respectively. These properties can also be set by using APIs Configuration.set(MRJobConfig.MAP_DEBUG_SCRIPT, String) and Configuration.set(MRJobConfig.REDUCE_DEBUG_SCRIPT, String).</li>
+</ul>
+<h3 id="note">Note</h3>
+<ul>
+<li>You can run python code as job as well.</li>
+</ul>
+<h1 id="thats-all-folks">That&rsquo;s all folks.</h1>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a href="/arm/tags/big-data">big-data</a></li>
+					
+					<li><a href="/arm/tags/software">software</a></li>
+					
+					<li><a href="/arm/tags/distributed-system">distributed-system</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
+<hr>⚡️
+	2022  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+</footer>
+
+
+</div>
+    </body>
+</html>

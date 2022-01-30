@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Monologue on python - My New Hugo Site</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="{:class=&ldquo;img-responsive&rdquo;}
+Different type of python Some notable mention wrt linux:
+ Cpython -&gt; CPython is the original Python implementation PyPy -&gt; A fast python implementation with a JIT compiler Jython -&gt; Python running on the Java Virtual Machine  Profiling and optimizing python Timing function
+{% highlight python linenos %}
+import time from functools import wraps import random
+def timing(f): def wrap(*args): time1 = time.time() ret = f(*args) time2 = time." />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="Monologue on python" />
+<meta property="og:description" content="{:class=&ldquo;img-responsive&rdquo;}
+Different type of python Some notable mention wrt linux:
+ Cpython -&gt; CPython is the original Python implementation PyPy -&gt; A fast python implementation with a JIT compiler Jython -&gt; Python running on the Java Virtual Machine  Profiling and optimizing python Timing function
+{% highlight python linenos %}
+import time from functools import wraps import random
+def timing(f): def wrap(*args): time1 = time.time() ret = f(*args) time2 = time." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://rava-dosa.github.io/arm/posts/2018-08-11-python-unknown/" /><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Monologue on python"/>
+<meta name="twitter:description" content="{:class=&ldquo;img-responsive&rdquo;}
+Different type of python Some notable mention wrt linux:
+ Cpython -&gt; CPython is the original Python implementation PyPy -&gt; A fast python implementation with a JIT compiler Jython -&gt; Python running on the Java Virtual Machine  Profiling and optimizing python Timing function
+{% highlight python linenos %}
+import time from functools import wraps import random
+def timing(f): def wrap(*args): time1 = time.time() ret = f(*args) time2 = time."/>
+
+	
+        <link href="http://rava-dosa.github.io/arm/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://rava-dosa.github.io/arm/css/main.2f9b5946627215dc1ae7fa5f82bfc9cfcab000329136befeea5733f21e77d68f.css" />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://rava-dosa.github.io/arm/">My New Hugo Site</a>
+	</div>
+	<nav>
+		
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Monologue on python</h1>
+			<div class="meta">Posted on Jan 1, 0001</div>
+		</div>
+		
+
+		<section class="body">
+			<p><img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png" alt="Python">{:class=&ldquo;img-responsive&rdquo;}</p>
+<h3 id="different-type-of-python">Different type of python</h3>
+<p>Some notable mention wrt linux:</p>
+<ul>
+<li>Cpython -&gt; CPython is the original Python implementation</li>
+<li>PyPy -&gt; A fast python implementation with a JIT compiler</li>
+<li>Jython -&gt; Python running on the Java Virtual Machine</li>
+</ul>
+<h3 id="profiling-and-optimizing-python">Profiling and optimizing python</h3>
+<p>Timing function</p>
+<p>{% highlight python linenos %}</p>
+<p>import time
+from functools import wraps
+import random</p>
+<p>def timing(f):
+def wrap(*args):
+time1 = time.time()
+ret = f(*args)
+time2 = time.time()
+print('{:s} function took {:.3f} ms'.format(f.<strong>name</strong>, (time2-time1)*1000.0))
+return ret
+return wrap</p>
+<p>@timing
+def random_sort(n):
+return sorted([random.random() for i in range(n)])</p>
+<p>{% endhighlight %}</p>
+<p>using time it</p>
+<p>{% highlight python linenos %}</p>
+<p>import timeit</p>
+<p>def linear_search(mylist, find):
+for x in mylist:
+if x == find:
+return True
+return False</p>
+<p>def linear_time():
+SETUP_CODE = '''
+from <strong>main</strong> import linear_search
+from random import randint'''</p>
+<pre><code>TEST_CODE = '''
+</code></pre>
+<p>mylist = [x for x in range(10000)]
+find = randint(0, len(mylist))
+linear_search(mylist, find)
+'''
+# timeit.repeat statement
+times = timeit.repeat(setup = SETUP_CODE,stmt = TEST_CODE,repeat = 3,number = 10000)</p>
+<pre><code># priniting minimum exec. time
+print('Linear search time: {}'.format(min(times)))  
+</code></pre>
+<p>if <strong>name</strong> == &ldquo;<strong>main</strong>&quot;:
+linear_time()</p>
+<p>{% endhighlight %}</p>
+<p>timing an script</p>
+<p>'''
+time -p python script.py
+'''
+using cprofile</p>
+<p>'''
+python -m cProfile -s cumulative script.py
+'''</p>
+<p>profiling memory</p>
+<p>'''
+pip install memory_profiler
+pip install psutil
+python -m memory_profiler script.py
+'''
+there is also one tool called guppy. And it&rsquo;s a really good library.</p>
+<h3 id="some-less-known-data-structure">Some less known data structure</h3>
+<p>This part of the blog is taken from PyMotw</p>
+<h4 id="chainmap">ChainMap</h4>
+<p>The ChainMap class manages a sequence of dictionaries, and searches through them in the order they are given to find values associated with keys</p>
+<p>{% highlight python linenos %}
+import collections</p>
+<p>a = {1: 10, 2: 20}
+b = {3: 30, 4: 40, 2:200}</p>
+<p>m1 = collections.ChainMap(a, b)
+m2 = collections.ChainMap(b, a)
+print(m1[2],end=&rdquo; &ldquo;)
+print(m2[2],end=&quot;\n&rdquo;)
+print(list(m1.keys()))
+print(list(m1.values()))
+for k, v in m1.items():
+print('{} = {}'.format(k, v))
+m1.maps = list(reversed(m1.maps))
+print(&lsquo;m1 = {}'.format(m1[2]))
+a[5]=50
+print(m1[5])
+m3 = m1.new_child()
+m3[2] = 2000
+m3[10] = 209
+{% endhighlight %}</p>
+<h4 id="counter">Counter</h4>
+<p>A Counter is a container that keeps track of how many times equivalent values are added.</p>
+<p>{% highlight python linenos %}
+import collections</p>
+<p>c = collections.Counter()
+print(&lsquo;Initial :&rsquo;, c)
+c.update(&lsquo;apoorvakumarhseenvaramuk&rsquo;)
+print(&lsquo;Sequence:&rsquo;, c)
+c.update({&lsquo;a&rsquo;: 1, &rsquo;d&rsquo;: 5})
+print(&lsquo;Dict    :&rsquo;, c)
+print(&lsquo;Most common:')
+for letter, count in c.most_common(3):
+print('{}: {}'.format(letter, count))
+c1 = collections.Counter(&lsquo;aaaaaaassddbcpoerqw&rsquo;)
+print(c1 + c)
+print(c1 - c)
+print(c1 &amp; c)
+print(c1 | c2)</p>
+<p>{% endhighlight %}</p>
+<h4 id="defaultdict">DefaultDict</h4>
+<p>The standard dictionary includes the method setdefault() for retrieving a value and establishing a default if the value does not exist. By contrast, defaultdict lets the caller specify the default up front when the container is initialized.</p>
+<p>{% highlight python linenos %}
+import collections</p>
+<p>def default_factory():
+return &lsquo;default value&rsquo;</p>
+<p>d = collections.defaultdict(default_factory, foo=&lsquo;bar&rsquo;)
+print(&rsquo;d:&rsquo;, d)
+print(&lsquo;foo =&gt;&rsquo;, d[&lsquo;foo&rsquo;])
+print(&lsquo;bar =&gt;&rsquo;, d[&lsquo;bar&rsquo;])</p>
+<p>{% endhighlight %}</p>
+<h4 id="namedtuple">NamedTuple</h4>
+<p>The standard tuple uses numerical indexes to access its members. Similar to C structure.</p>
+<p>{% highlight python linenos %}</p>
+<p>import collections</p>
+<p>Person = collections.namedtuple(&lsquo;Person&rsquo;, &lsquo;name age&rsquo;)</p>
+<p>bob = Person(name=&lsquo;Bob&rsquo;, age=30)
+print('\nRepresentation:', bob)</p>
+<p>jane = Person(name=&lsquo;Jane&rsquo;, age=29)
+print('\nField by name:', jane.name)</p>
+<p>print('\nFields by index:')
+for p in [bob, jane]:
+print('{} is {} years old'.format(*p))</p>
+<p>{% endhighlight %}</p>
+<p>It&rsquo;s immutable.</p>
+<p>{% highlight python linenos %}</p>
+<p>import collections</p>
+<p>Person = collections.namedtuple(&lsquo;Person&rsquo;, &lsquo;name age&rsquo;)</p>
+<p>bob = Person(name=&lsquo;Bob&rsquo;, age=30)
+print(&lsquo;Representation:&rsquo;, bob)
+print(&lsquo;As Dictionary:&rsquo;, bob._asdict())</p>
+<p>{% endhighlight %}</p>
+<h4 id="some-more-detail-about-collectionhttpspymotwcom3collectionsabchtml"><a href="https://pymotw.com/3/collections/abc.html">Some more detail about collection</a></h4>
+<h3 id="itertools">Itertools</h3>
+<p>The chain() function takes several iterators as arguments and returns a single iterator that produces the contents of all of the inputs as though they came from a single iterator.</p>
+<p>{% highlight python linenos %}</p>
+<p>from itertools import *</p>
+<p>for i in chain([1, 2, 3], [&lsquo;a&rsquo;, &lsquo;b&rsquo;, &lsquo;c&rsquo;]):
+print(i, end=' &lsquo;)
+print()</p>
+<p>{% endhighlight %}</p>
+<h4 id="zip_longest">zip_longest()</h4>
+<p>{% highlight python linenos %}</p>
+<p>from itertools import *</p>
+<p>r1 = range(3)
+r2 = range(2)</p>
+<p>print('\nzip_longest processes all of the values:')
+print(list(zip_longest(r1, r2)))</p>
+<p>{% endhighlight %}</p>
+<h4 id="islice">islice()</h4>
+<p>The islice() function returns an iterator which returns selected items from the input iterator, by index.</p>
+<p>{% highlight python linenos %}</p>
+<p>from itertools import *</p>
+<p>print(&lsquo;Stop at 5:')
+for i in islice(range(100), 5):
+print(i, end=&rsquo; &lsquo;)
+print('\n&rsquo;)</p>
+<p>print(&lsquo;Start at 5, Stop at 10:')
+for i in islice(range(100), 5, 10):
+print(i, end=&rsquo; &lsquo;)
+print('\n&rsquo;)</p>
+<p>print(&lsquo;By tens to 100:')
+for i in islice(range(100), 0, 100, 10):
+print(i, end=&rsquo; &lsquo;)
+print('\n&rsquo;)</p>
+<p>{% endhighlight %}</p>
+<h4 id="starmap">starmap()</h4>
+<p>The starmap() function is similar to map(), but instead of constructing a tuple from multiple iterators, it splits up the items in a single iterator as arguments to the mapping function using the * syntax.</p>
+<p>{% highlight python linenos %}</p>
+<p>from itertools import *</p>
+<p>values = [(0, 5), (1, 6), (2, 7), (3, 8), (4, 9)]</p>
+<p>for i in starmap(lambda x, y: (x, y, x * y), values):
+print('{} * {} = {}'.format(*i))</p>
+<p>{% endhighlight %}</p>
+<h4 id="fraction-and-count">fraction and count()</h4>
+<p>count() function returns an iterator that produces consecutive integers, indefinitely</p>
+<p>{% highlight python linenos %}</p>
+<p>from itertools import *</p>
+<p>import fractions
+from itertools import *</p>
+<p>start = fractions.Fraction(1, 3)
+step = fractions.Fraction(1, 3)</p>
+<p>for i in zip(count(start, step), [&lsquo;a&rsquo;, &lsquo;b&rsquo;, &lsquo;c&rsquo;]):
+print('{}: {}'.format(*i))</p>
+<p>{% endhighlight %}</p>
+<p>cycle() function returns an iterator that repeats the contents of the arguments it is given indefinitely. Since it has to remember the entire contents of the input iterator,  it may consume quite a bit of memory if the iterator is long.</p>
+<h4 id="accumulate">accumulate()</h4>
+<p>accumulate() function processes the input iterable, passing the nth and n+1st item to a function and producing the return value instead of either input. The default function used to combine the two values adds them, so accumulate() can be used to produce the cumulative sum of a series of numerical inputs.</p>
+<p>{% highlight python linenos %}</p>
+<p>from itertools import *</p>
+<p>print(list(accumulate(range(5))))
+print(list(accumulate(&lsquo;abcde&rsquo;)))</p>
+<p>{% endhighlight %}</p>
+<p>It is possible to combine accumulate() with any other function that takes two input values to achieve different results.</p>
+<p>{% highlight python linenos %}</p>
+<p>from itertools import *
+def f(a, b):
+print(a, b)
+return b + a + b
+print(list(accumulate(&lsquo;abcde&rsquo;, f)))</p>
+<p>{% endhighlight %}</p>
+<h4 id="permutation">permutation()</h4>
+<p>{% highlight python linenos %}</p>
+<p>from itertools import permutations
+perm = permutations([1, 2, 3], 2)
+for i in list(perm):
+print i</p>
+<h1 id="answer-1-21-32-12-33-13-2">Answer-&gt;(1, 2),(1, 3),(2, 1),(2, 3),(3, 1),(3, 2)</h1>
+<p>{% endhighlight %}</p>
+<h4 id="combination">combination()</h4>
+<p>{% highlight python linenos %}</p>
+<p>from itertools import combinations
+comb = combinations([1, 2, 3], 2)
+for i in list(comb):
+print i</p>
+<p>{% endhighlight %}</p>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a href="/arm/tags/software">software</a></li>
+					
+					<li><a href="/arm/tags/python">python</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
+<hr>⚡️
+	2022  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+</footer>
+
+
+</div>
+    </body>
+</html>

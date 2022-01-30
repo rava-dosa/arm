@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>installation on My New Hugo Site</title>
+    <link>http://rava-dosa.github.io/arm/tags/installation/</link>
+    <description>Recent content in installation on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://rava-dosa.github.io/arm/tags/installation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to install tensorflow-gpu without shitting on your computer ?</title>
+      <link>http://rava-dosa.github.io/arm/posts/2018-08-02-tensorflow-gpu/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/posts/2018-08-02-tensorflow-gpu/</guid>
+      <description>Once upon a time There was a operating system called Ubuntu 14.04, I tried installing tensorflow gpu on that. And I was stuck in login loop as Tom cruise was stuck in time loop in the movie &amp;ldquo;The Edge of tomorrow&amp;rdquo;. I couldn&amp;rsquo;t get out of login loop until I installed Ubuntu 16.04
+Want to know how was my experience with ubuntu 16.04 In a very few[sarcastic laugh] steps I was able to install it.</description>
+    </item>
+    
+  </channel>
+</rss>

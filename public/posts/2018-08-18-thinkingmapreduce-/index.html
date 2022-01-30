@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Thinking in an map-reduce way - My New Hugo Site</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="General Architecture {:class=&ldquo;img-responsive&rdquo;}
+Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . I am not copying content from anywhere.
+Preprocessing As per however small my perspective is the I think writing mapper and reducer is not the big-deal, What the most most important thing is data preprocessing, that is how you are gonna provide data to the jar file." />
+	<meta property="og:image" content=""/>
+	<meta property="og:title" content="Thinking in an map-reduce way" />
+<meta property="og:description" content="General Architecture {:class=&ldquo;img-responsive&rdquo;}
+Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . I am not copying content from anywhere.
+Preprocessing As per however small my perspective is the I think writing mapper and reducer is not the big-deal, What the most most important thing is data preprocessing, that is how you are gonna provide data to the jar file." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://rava-dosa.github.io/arm/posts/2018-08-18-thinkingmapreduce-/" /><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Thinking in an map-reduce way"/>
+<meta name="twitter:description" content="General Architecture {:class=&ldquo;img-responsive&rdquo;}
+Before We start It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . I am not copying content from anywhere.
+Preprocessing As per however small my perspective is the I think writing mapper and reducer is not the big-deal, What the most most important thing is data preprocessing, that is how you are gonna provide data to the jar file."/>
+
+	
+        <link href="http://rava-dosa.github.io/arm/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css" rel="stylesheet">
+	
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://rava-dosa.github.io/arm/css/main.2f9b5946627215dc1ae7fa5f82bfc9cfcab000329136befeea5733f21e77d68f.css" />
+	
+	
+</head>
+<body>
+        <div class="content"><header>
+	<div class="main">
+		<a href="http://rava-dosa.github.io/arm/">My New Hugo Site</a>
+	</div>
+	<nav>
+		
+		
+	</nav>
+</header>
+
+<main>
+	<article>
+		<div class="title">
+			<h1 class="title">Thinking in an map-reduce way</h1>
+			<div class="meta">Posted on Jan 1, 0001</div>
+		</div>
+		
+
+		<section class="body">
+			<h3 id="general-architecture">General Architecture</h3>
+<p><img src="https://www.networkershome.com/wp-content/uploads/2017/10/nh-big-data-hadoop.jpg" alt="MapReduce">{:class=&ldquo;img-responsive&rdquo;}</p>
+<h3 id="before-we-start">Before We start</h3>
+<p>It&rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&rsquo;s why I am writing this blog 😉 . I am not copying content from anywhere.</p>
+<h3 id="preprocessing">Preprocessing</h3>
+<p>As per however small my perspective is the I think writing mapper and reducer is not the big-deal, What the most most important thing is data preprocessing, that is how you are gonna provide data to the jar file. To preprocess the data you have to think about what your key value will be, and how your data is. You can&rsquo;t expect your data to be clean and formatted, and you have to take care of every edge case there. Just imagine you are doing matrix multiplication but if some of your individual no&rsquo;s is greater than you ram total address space then, you might be in big trouble(I tried copying once 1 hd movie by opening it in sublime and the ctl+a, ctrl+c, it&rsquo;s not pleasent), then you have to precalculate your multiplication step as well put it as key and by using job control chain two map reduce task. I went a little offroad above,as you give one one line to one mapper so how would you like to provide that one line, what if for matrix multiplication you provide one such as, <strong>a[1,1] b[1,1] b[2,1]&hellip;&hellip;&hellip;&hellip;&hellip;. a[1,2] b[1,1] b[2,1] &hellip;&hellip;&hellip;&hellip;&hellip;.</strong> now as you know both matrix parameters you can be assured that (we can use bash variable to store local variable as well but there is distributed cache as well) one mapper can write key value pair as <strong>Key&lt;1,1&gt; a[1,1]b[1,1], Key&lt;1,1&gt; a[1,2]b[2,1], &hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..</strong> And in reducer step you can just add all the key value pair to get something like <strong>Key&lt;1,1&gt; sumof(i=&gt;1-&gt;n)a[1,i]b[i,1]</strong>.</p>
+<h3 id="mapper-and-reducer">Mapper and reducer</h3>
+<p>I thought I will write this individually but it got included above.</p>
+<h1 id="thats-all-folks">That&rsquo;s all folks.</h1>
+
+		</section>
+
+		<div class="post-tags">
+			
+			
+			<nav class="nav tags">
+				<ul class="tags">
+					
+					<li><a href="/arm/tags/big-data">big-data</a></li>
+					
+					<li><a href="/arm/tags/software">software</a></li>
+					
+					<li><a href="/arm/tags/distributed-system">distributed-system</a></li>
+					
+				</ul>
+			</nav>
+			
+			
+		</div>
+	</article>
+</main>
+<footer>
+<hr>⚡️
+	2022  <a href="https://github.com/athul/archie">Archie Theme</a> | Built with <a href="https://gohugo.io">Hugo</a>
+</footer>
+
+
+</div>
+    </body>
+</html>

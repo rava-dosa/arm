@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>scaling on My New Hugo Site</title>
+    <link>http://rava-dosa.github.io/arm/tags/scaling/</link>
+    <description>Recent content in scaling on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://rava-dosa.github.io/arm/tags/scaling/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Scaling with MySQL</title>
+      <link>http://rava-dosa.github.io/arm/posts/2018-08-06-scaling-mysql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://rava-dosa.github.io/arm/posts/2018-08-06-scaling-mysql/</guid>
+      <description>Cluster of computers {:class=&amp;ldquo;img-responsive&amp;rdquo;}
+Before We start It&amp;rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&amp;rsquo;s why I am writing this blog 😉 .
+How to scale with MySQL ?  Replication Sharding  Replication In this process you replicate the main .db file to different machine.
+How general processes like update, insert, delete etc. works ? Generally in every cluster there are two groups of server, master and slave.</description>
+    </item>
+    
+  </channel>
+</rss>
