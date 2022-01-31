@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>distributed-system on Blog Test</title>
-    <link>http://rava-dosa.github.io/arm/tags/distributed-system/</link>
+    <link>https://rava-dosa.github.io/arm/tags/distributed-system/</link>
     <description>Recent content in distributed-system on Blog Test</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="http://rava-dosa.github.io/arm/tags/distributed-system/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://rava-dosa.github.io/arm/tags/distributed-system/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Dialogues on YARN()</title>
-      <link>http://rava-dosa.github.io/arm/posts/2018-08-25-kafka/</link>
+      <link>https://rava-dosa.github.io/arm/posts/2018-08-25-kafka/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://rava-dosa.github.io/arm/posts/2018-08-25-kafka/</guid>
+      <guid>https://rava-dosa.github.io/arm/posts/2018-08-25-kafka/</guid>
       <description>General Architecture {:class=&amp;ldquo;img-responsive&amp;rdquo;}
 Before We start It&amp;rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&amp;rsquo;s why I am writing this blog 😉 . I will be copying the whole content from official documentation.
 Let&amp;rsquo;s start Kafka has three main components-&amp;gt;  A Producer: The service that emits the source data. A Broker: Kafka acts as an intermediary between the producer and the consumer. It uses the power of API&amp;rsquo;s to get and broadcast data A Consumer: The service that uses the data which the broker will broadcast.</description>
@@ -19,10 +19,10 @@ Let&amp;rsquo;s start Kafka has three main components-&amp;gt;  A Producer: The 
     
     <item>
       <title>How to make writing in a file, safe ?</title>
-      <link>http://rava-dosa.github.io/arm/posts/2018-08-27-filelock/</link>
+      <link>https://rava-dosa.github.io/arm/posts/2018-08-27-filelock/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://rava-dosa.github.io/arm/posts/2018-08-27-filelock/</guid>
+      <guid>https://rava-dosa.github.io/arm/posts/2018-08-27-filelock/</guid>
       <description>General Architecture ![DB1](/img/Screenshot from 2018-08-27 18-09-19.png){:class=&amp;ldquo;img-responsive&amp;rdquo;}
 Before We start It&amp;rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&amp;rsquo;s why I am writing this blog 😉 . This is an original content.
 Let&amp;rsquo;s start Problem Statement -&amp;gt; This is a distributed system. Multiple system is trying to read or write from a file, Now how to make it safe ? . Safe in the sense that how can sys 4 possibly know that sys 1 is writing in the file.</description>
@@ -30,10 +30,10 @@ Let&amp;rsquo;s start Problem Statement -&amp;gt; This is a distributed system. 
     
     <item>
       <title>Monologue on hadoop file system</title>
-      <link>http://rava-dosa.github.io/arm/posts/2018-08-11-hdfs/</link>
+      <link>https://rava-dosa.github.io/arm/posts/2018-08-11-hdfs/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://rava-dosa.github.io/arm/posts/2018-08-11-hdfs/</guid>
+      <guid>https://rava-dosa.github.io/arm/posts/2018-08-11-hdfs/</guid>
       <description>Cluster of computers {:class=&amp;ldquo;img-responsive&amp;rdquo;}
 Before We start It&amp;rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&amp;rsquo;s why I am writing this blog 😉 . And I am totally copying the content of this blog from Hadoop Documentation.
 I just googled this &amp;quot; HDFS relaxes a few POSIX requirements to enable streaming access to file system data &amp;quot; You will find tons of link, You can accuse them of plagiarism, Mine as well.</description>
@@ -41,10 +41,10 @@ I just googled this &amp;quot; HDFS relaxes a few POSIX requirements to enable s
     
     <item>
       <title>Monologue on Map Reduce</title>
-      <link>http://rava-dosa.github.io/arm/posts/2018-08-18-mapreduce/</link>
+      <link>https://rava-dosa.github.io/arm/posts/2018-08-18-mapreduce/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://rava-dosa.github.io/arm/posts/2018-08-18-mapreduce/</guid>
+      <guid>https://rava-dosa.github.io/arm/posts/2018-08-18-mapreduce/</guid>
       <description>General Architecture {:class=&amp;ldquo;img-responsive&amp;rdquo;}
 Before We start It&amp;rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&amp;rsquo;s why I am writing this blog 😉 . I am copying content from various sources which I have read and experimented in the last week.
 Installation This [link] works totally fine. Except the download link Use this link to download hadoop instead [link] .Few pointers for misery I faced:</description>
@@ -52,10 +52,10 @@ Installation This [link] works totally fine. Except the download link Use this l
     
     <item>
       <title>Monologue on Map Reduce</title>
-      <link>http://rava-dosa.github.io/arm/posts/2018-08-18-yarn/</link>
+      <link>https://rava-dosa.github.io/arm/posts/2018-08-18-yarn/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://rava-dosa.github.io/arm/posts/2018-08-18-yarn/</guid>
+      <guid>https://rava-dosa.github.io/arm/posts/2018-08-18-yarn/</guid>
       <description>General Architecture {:class=&amp;ldquo;img-responsive&amp;rdquo;}
 Before We start It&amp;rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&amp;rsquo;s why I am writing this blog 😉 . I am copying content from various sources which I have read and experimented in the last week.
 Installation This [link] works totally fine. Except the download link Use this link to download hadoop instead [link] .Few pointers for misery I faced:</description>
@@ -63,10 +63,10 @@ Installation This [link] works totally fine. Except the download link Use this l
     
     <item>
       <title>Scaling with MySQL</title>
-      <link>http://rava-dosa.github.io/arm/posts/2018-08-06-scaling-mysql/</link>
+      <link>https://rava-dosa.github.io/arm/posts/2018-08-06-scaling-mysql/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://rava-dosa.github.io/arm/posts/2018-08-06-scaling-mysql/</guid>
+      <guid>https://rava-dosa.github.io/arm/posts/2018-08-06-scaling-mysql/</guid>
       <description>Cluster of computers {:class=&amp;ldquo;img-responsive&amp;rdquo;}
 Before We start It&amp;rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&amp;rsquo;s why I am writing this blog 😉 .
 How to scale with MySQL ?  Replication Sharding  Replication In this process you replicate the main .db file to different machine.
@@ -75,10 +75,10 @@ How general processes like update, insert, delete etc. works ? Generally in ever
     
     <item>
       <title>Thinking in an map-reduce way</title>
-      <link>http://rava-dosa.github.io/arm/posts/2018-08-18-thinkingmapreduce-/</link>
+      <link>https://rava-dosa.github.io/arm/posts/2018-08-18-thinkingmapreduce-/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://rava-dosa.github.io/arm/posts/2018-08-18-thinkingmapreduce-/</guid>
+      <guid>https://rava-dosa.github.io/arm/posts/2018-08-18-thinkingmapreduce-/</guid>
       <description>General Architecture {:class=&amp;ldquo;img-responsive&amp;rdquo;}
 Before We start It&amp;rsquo;s totally theoritical I have no practical experience in this topic. I want that(practical experience) that&amp;rsquo;s why I am writing this blog 😉 . I am not copying content from anywhere.
 Preprocessing As per however small my perspective is the I think writing mapper and reducer is not the big-deal, What the most most important thing is data preprocessing, that is how you are gonna provide data to the jar file.</description>

@@ -1,4 +1,4 @@
-baseURL = 'http://rava-dosa.github.io/arm/'
+baseURL = 'https://rava-dosa.github.io/arm/'
 languageCode = 'en-us'
 title = 'Blog Test'
 theme = 'archie'
