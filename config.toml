@@ -11,7 +11,7 @@ paginate=5 # articles per page
 # googleAnalytics = "UA-179536383-1"
 publishDir = 'docs'
 [params]
-	mode="light" # color-mode → light,dark or auto
+	mode="toggle" # color-mode → light,dark or auto
 	useCDN=false # don't use CDNs for fonts and icons, instead serve them locally.
 	subtitle = "Notes on programming and life"
 	og_image = "img/calvin-hobbes.png"
